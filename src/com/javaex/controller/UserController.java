@@ -1,4 +1,4 @@
-//2022.01.11(화)13:52수업-17:47 과제하기 전 우선 쭉 훑기
+//2022.01.11(화)13:52수업-17:47
 package com.javaex.controller;
 
 import java.io.IOException;

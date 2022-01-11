@@ -1,3 +1,4 @@
+//2022.01.11(화)수업-2022.01.11(화)21:17에 guestbook위해 수정하다가 여기다 해야 할 게 아님을 알게 됨
 package com.javaex.dao;
 
 import java.sql.Connection;
@@ -10,7 +11,8 @@ import com.javaex.vo.UserVo;
 
 public class UserDao {
 
-	// 0. import java.sql.*; 필드
+	// 필드
+	// 0. import java.sql.*;
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
@@ -46,7 +48,7 @@ public class UserDao {
 		}
 	}
 
-	// 저장 메소드 (사용자 입장에선 회원 가입)
+	// 저장 메소드 (사용자 입장에선 회원 가입)_수업 중 완성
 	public int insert(UserVo userVo) {
 		int count = 0;
 
@@ -81,5 +83,7 @@ public class UserDao {
 		close();
 		return count;
 	}
+
+	
 
 }
