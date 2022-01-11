@@ -1,4 +1,4 @@
-//2022.01.11(화)13:52수업
+//2022.01.11(화)13:52수업-17:47 과제하기 전 우선 쭉 훑기
 package com.javaex.controller;
 
 import java.io.IOException;
@@ -15,8 +15,7 @@ import com.javaex.vo.UserVo;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("/user");
 

@@ -20,6 +20,7 @@ public class UserDao {
 	private String id = "webdb";
 	private String pw = "webdb";
 
+	// 메소드 일반
 	private void getConnection() {
 		try {
 			Class.forName(driver);
