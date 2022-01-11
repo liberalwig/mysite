@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet"
+	type="text/css">
+<link href="/mysite/assets/css/user.css" rel="stylesheet"
+	type="text/css">
 
 </head>
 
@@ -24,12 +26,12 @@
 				<li><a href="" class="btn_s">로그아웃</a></li>
 				<li><a href="" class="btn_s">회원정보수정</a></li>
 			</ul>
-			-->	
+			-->
 			<ul>
 				<li><a href="" class="btn_s">로그인</a></li>
 				<li><a href="" class="btn_s">회원가입</a></li>
 			</ul>
-			
+
 		</div>
 		<!-- //header -->
 
@@ -55,7 +57,7 @@
 			<!-- //aside -->
 
 			<div id="content">
-			
+
 				<div id="content-head">
 					<h3>회원가입</h3>
 					<div id="location">
@@ -68,16 +70,14 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-	
+
 				<div id="user">
 					<div id="joinOK">
-					
+
 						<p class="text-large bold">
-							회원가입을 축하합니다.<br>
-							<br>
-							<a href="" >[로그인하기]</a>
+							회원가입을 축하합니다.<br> <br> <a href="">[로그인하기]</a>
 						</p>
-							
+
 					</div>
 					<!-- //joinOK -->
 				</div>
@@ -88,9 +88,7 @@
 		<!-- //container  -->
 
 
-		<div id="footer">
-			Copyright ⓒ 2020 최승은. All right reserved
-		</div>
+		<div id="footer">Copyright ⓒ 2020 최승은. All right reserved</div>
 		<!-- //footer -->
 
 	</div>
