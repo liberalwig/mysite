@@ -1,4 +1,4 @@
-//2022.01.11(화)23:00
+//2022.01.11(화)23:00-2022.01.12(수)01:31
 package com.javaex.dao;
 
 import java.sql.Connection;
@@ -46,7 +46,7 @@ public class GuestbookDao {
 		getConnection();
 		try {
 
-			// 3. SQL문 준비 / 바인딩 / 실행 // 4.결과처리
+			// 3. SQL문 준비 / 바인딩 / 실행
 			String query = "";
 			query += " select   no ";
 			query += "          ,name ";
