@@ -93,10 +93,21 @@ public class UserController extends HttpServlet {
 				// toString()을 보여달라는 명령이므로
 
 			}
+		}
 
+		else if ("logout".equals(action)) {
+			System.out.println("user > logout");
+
+			HttpSession session = request.getSession();
+			session.removeAttribute("authUser");
+			session.invalidate();
+			
+			WebUtil.redirect(request, response, "/mysite/main");
 		}
 
 	}
+
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
