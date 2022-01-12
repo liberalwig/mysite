@@ -1,4 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="com.javaex.vo.UserVo"%>
+<%
+UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
+%>
+
 
 
 <!DOCTYPE html>
@@ -21,17 +27,26 @@
 				<a href="">MySite</a>
 			</h1>
 
-			<!-- 
-			<ul>
-				<li>최승은 님 안녕하세요^^</li>
-				<li><a href="" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
-			</ul>
-			-->
+
+			<%
+			if (authUser == null) {//로그인 이전 or 로그인 실패
+			%>
 			<ul>
 				<li><a href="" class="btn_s">로그인</a></li>
 				<li><a href="" class="btn_s">회원가입</a></li>
 			</ul>
+			<%
+			} else { //로그인 이후 성공 시
+			%>
+			<ul>
+				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
+				<li><a href="" class="btn_s">로그아웃</a></li>
+				<li><a href="" class="btn_s">회원정보수정</a></li>
+			</ul>
+			<%
+			}
+			%>
+
 
 		</div>
 		<!-- //header -->
@@ -63,8 +78,8 @@
 							</span> <br> 사이트 소개, 회원가입, 방명록, 게시판으로 구성되어 있으며<br>
 							jsp&serlvet(모델2) 방식으로 제작되었습니다.<br> <br> 자바 수업 + 데이터베이스
 							수업 + 웹프로그래밍 수업<br> 배운 거 있는거 없는 거 다 합쳐서 만들어 놓은 사이트 입니다.<br>
-							<br> (자유롭게 꾸며보세요!!)<br> <br>
-							<br> <a class="" href="">[방명록에 글 남기기]</a>
+							<br> (자유롭게 꾸며보세요!!)<br> <br> <br> <a class=""
+								href="">[방명록에 글 남기기]</a>
 						</p>
 					</div>
 					<!-- //greetings -->

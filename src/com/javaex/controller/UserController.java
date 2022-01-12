@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.javaex.dao.UserDao;
 import com.javaex.util.WebUtil;
@@ -69,13 +70,30 @@ public class UserController extends HttpServlet {
 
 			UserDao userDao = new UserDao();
 			UserVo authVo = userDao.getUser(id, password);// authVo: 인증성공한 유저
-
-			System.out.println(authVo); //authVo=0x123이런 식으로 주소 형태니까
-			System.out.println(authVo.toString()); // 둘 행의 효과는 동일함. 원래println이 변수 안에 있는 toString()을 보여달라는 명령이므로
 			// 데이터 있으면 =>어트리뷰트 session authVo에 넣고: 로그인 성공!
 			// 데이터 null이면 => userVo에 그대로. 아무 것도 안 한다: 로그인 실패
-			
-			
+
+			if (authVo == null) {// 로그인 실패
+				System.out.println("로그인 실패");
+
+				WebUtil.redirect(request, response, "/mysite/user?action=loginForm");
+
+			} else {
+				System.out.println("로그인 성공");
+
+				HttpSession session = request.getSession(); // 세션값을 메모리에 넣어줘
+				session.setAttribute("authUser", authVo); // 만일 여기서 rqst.setAttribute라 하면 세션메모리를 위에서 만들어 놓고 안 쓰는 격
+
+				WebUtil.redirect(request, response, "/mysite/main");
+
+				// 로그인 성공해서 값을 넣기
+				// System.out.println(authVo); // authVo=0x123이런 식으로 주소 형태니까. 이 두 항을 로그인 성공 뒤에
+				// 붙여 놨더니 다시 toString빈페이지 나옴
+				// System.out.println(authVo.toString()); // 둘 행의 효과는 동일함. 원래println이 변수 안에 있는
+				// toString()을 보여달라는 명령이므로
+
+			}
+
 		}
 
 	}

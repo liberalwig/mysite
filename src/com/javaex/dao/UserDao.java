@@ -84,10 +84,11 @@ public class UserDao {
 		return count;
 	}
 
-	// 회원 정보 1명 가져오기
+	// 회원 정보 1명 가져오기_세션 넣기 이전 과정
 	public UserVo getUser(String id, String password) {
 
 		UserVo userVo = null;
+		
 		getConnection();
 
 		try {
@@ -115,10 +116,10 @@ public class UserDao {
 			// 4. 결과처리
 			while (rs.next()) {
 				int no = rs.getInt("no");
-				String name = rs.getString("name"); //query라 써서 오류였어
+				String name = rs.getString("name"); //'정우성 님 환영합니다'를 안 보여주려면 이 행 안 쓰면 돼
 
 				userVo = new UserVo();
-				userVo.setNo(no);
+				userVo.setNo(no);  //두 행의 세터 통해 정보 넣어줘
 				userVo.setName(name); //여기 불확실. password가 필요한 정보였어서 이렇게 썼는데 Dao는 위 query받을 거니까 name인가봐
 			}
 
