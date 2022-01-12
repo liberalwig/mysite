@@ -84,6 +84,50 @@ public class UserDao {
 		return count;
 	}
 
-	
+	// 회원 정보 1명 가져오기
+	public UserVo getUser(String id, String password) {
+
+		UserVo userVo = null;
+		getConnection();
+
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// 문자열
+			String query = "";
+			query += " select no, ";
+			query += "        name ";
+			query += " from users ";
+			query += " where id = ? ";
+			query += " and password = ? ";
+			System.out.println(query);
+			
+			
+			// 쿼리문
+			pstmt = conn.prepareStatement(query);
+
+			// 바인딩
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+
+			// 실행
+			rs = pstmt.executeQuery();
+
+			// 4. 결과처리
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String name = rs.getString("name"); //query라 써서 오류였어
+
+				userVo = new UserVo();
+				userVo.setNo(no);
+				userVo.setName(name); //여기 불확실. password가 필요한 정보였어서 이렇게 썼는데 Dao는 위 query받을 거니까 name인가봐
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error: " + e);
+		}
+
+		close();
+		return userVo;
+	}
 
 }

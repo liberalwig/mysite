@@ -14,6 +14,9 @@ public class UserVo {
 	public UserVo() {
 
 	}
+	
+	
+	
 
 	public UserVo(String id, String password, String name, String gender) {
 		super();

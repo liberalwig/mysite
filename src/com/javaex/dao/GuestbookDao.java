@@ -19,7 +19,7 @@ public class GuestbookDao {
 	private ResultSet rs = null;
 
 	private String driver = "oracle.jdbc.driver.OracleDriver";
-	private String url = "jdbc:oracle.thin:@localhost:1521:xe";
+	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	private String id = "webdb";
 	private String pw = "webdb";
 
@@ -104,15 +104,15 @@ public class GuestbookDao {
 		try {// 3. 쿼리문 준비 / 바인딩 /실행
 			String query = "";
 			query += " insert into guestbook ";
-			query += " values(seq_guestbook_no.nextval, ?, ?, ?, sysdate) ";
+			query += " values(seq_id.nextval, ?, ?, ?, sysdate) ";
 
 			// 쿼리 만들기
 			pstmt = conn.prepareStatement(query);
 
 			// 바인딩
-			pstmt.setString(2, guestbookVo.getName());
-			pstmt.setString(3, guestbookVo.getPassword());
-			pstmt.setString(4, guestbookVo.getContent());
+			pstmt.setString(1, guestbookVo.getName());
+			pstmt.setString(2, guestbookVo.getPassword());
+			pstmt.setString(3, guestbookVo.getContent());
 
 			// 쿼리문 실행
 			count = pstmt.executeUpdate();

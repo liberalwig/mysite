@@ -1,3 +1,4 @@
+<!-- 2022.01.12(수)11:13수업 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -7,7 +8,8 @@
 <title>Insert title here</title>
 <link href="/mysite/assets/css/mysite.css" rel="stylesheet"
 	type="text/css">
-<link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/user.css" rel="stylesheet"
+	type="text/css">
 
 </head>
 <body>
@@ -71,19 +73,19 @@
 
 				<div id="user">
 					<div id="loginForm">
-						<form action="" method="">
+						<form action="/mysite/user" method="get">
 
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> <input
-									type="text" id="input-uid" name="" value=""
+									type="text" id="input-uid" name="id" value=""
 									placeholder="아이디를 입력하세요">
 							</div>
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">비밀번호</label> <input
-									type="text" id="input-pass" name="" value=""
+									type="text" id="input-pass" name="password" value=""
 									placeholder="비밀번호를 입력하세요">
 							</div>
 
@@ -92,6 +94,10 @@
 							<div class="button-area">
 								<button type="submit" id="btn-submit">로그인</button>
 							</div>
+
+							<!--action=login 기능이 사용자에겐 안 보이도록-->
+							<input type="text" name="action" value="login">
+
 
 						</form>
 					</div>
