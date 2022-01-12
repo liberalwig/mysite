@@ -1,5 +1,10 @@
 <!-- 2022.01.12(수)11:13수업 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+String result = request.getParameter("result"); //로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함.
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +25,7 @@
 				<a href="">MySite</a>
 			</h1>
 
-		
+
 			<ul>
 				<li><a href="" class="btn_s">로그인</a></li>
 				<li><a href="" class="btn_s">회원가입</a></li>
@@ -82,6 +87,16 @@
 									type="text" id="input-pass" name="password" value=""
 									placeholder="비밀번호를 입력하세요">
 							</div>
+
+
+
+							<%
+							if ("fail".equals(result)) {
+							%>
+							<p>로그인에 실패했습니다. 다시 로그인 해주세요.</p> <!--로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함-->
+							<%
+							}
+							%>
 
 
 							<!-- 버튼영역 -->
