@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
 			if (authVo == null) {// 로그인 실패
 				System.out.println("로그인 실패");
 
-				WebUtil.redirect(request, response, "/mysite/user?action=loginForm");
+				WebUtil.redirect(request, response, "/mysite/user?action=loginForm&result=fail");
 
 			} else {
 				System.out.println("로그인 성공");
