@@ -10,8 +10,7 @@ UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오
 <%
 List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gList");
 %>
-<!-- 이게 뭐지? -->
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -94,51 +93,29 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 				</form>
 
 
-				<%
-				for (int i = 0; i < guestbookList.size(); i++) {
-				%>>
+				<c:foreach items=" ${ requestScope.gList } var= "vo" varstatus="status" >
 
-				<table class="guestRead">
-					<colgroup>
-						<col style="width: 10%;">
-						<col style="width: 40%;">
-						<col style="width: 40%;">
-						<col style="width: 10%;">
-					</colgroup>
-					<tr>
-						<td><%=guestbookList.get(i).getNo()%></td>
-						<!-- 정해진 이정재 말고 db에 있는 자료 -->
-						<td><%=guestbookList.get(i).getName()%></td>
-						<td><%=guestbookList.get(i).getRegdate()%></td>
-						<td><a href="">[삭제]</a></td>
-					</tr>
-					<tr>
-						<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-					</tr>
-				</table>
+					<table class="guestRead">
+						<colgroup>
+							<col style="width: 10%;">
+							<col style="width: 40%;">
+							<col style="width: 40%;">
+							<col style="width: 10%;">
+						</colgroup>
+						<tr>
+							<td>${ vo.no }</td>
+							<!-- 정해진 이정재 말고 db에 있는 자료 -->
+							<td>${ vo.name }</td>
+							<td>${ vo.regDate }</td>
+							<td><a href="/mysite/guest?action=delte?no=${ vo.no }">[삭제]</a></td>
+						</tr>
+						<tr>
+							<td colspan=4 class="text-left">${ vo.content }</td>
+						</tr>
+					</table>
+				</c:foreach>
 				<!-- //guestRead -->
 
-				<table class="guestRead">
-					<colgroup>
-						<col style="width: 10%;">
-						<col style="width: 40%;">
-						<col style="width: 40%;">
-						<col style="width: 10%;">
-					</colgroup>
-					<tr>
-						<td>1234555</td>
-						<td>이정재</td>
-						<td>2022-03-03 12:12:12</td>
-						<td><a href="">[삭제]</a></td>
-					</tr>
-					<tr>
-						<td colspan=4 class="text-left">방명록 글입니다. 방명록 글입니다.</td>
-					</tr>
-				</table>
-
-				<%
-				}
-				%>
 
 				<!-- //guestRead -->
 

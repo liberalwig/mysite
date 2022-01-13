@@ -5,6 +5,7 @@
 UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
 String result = request.getParameter("result"); //로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함.
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -67,14 +68,12 @@ String result = request.getParameter("result"); //로그인 시도 후 실패 �
 							>
 						</div>
 
-						<%
-						if ("fail".equals(result)) {
-						%>
+						<c:if test=" ${ param.result == fail} ">
 						<p>로그인에 실패했습니다. 다시 로그인 해주세요.</p>
 						<!--로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함-->
-						<%
+						
 						}
-						%>
+						</c:if>
 
 						<!-- 버튼영역 -->
 						<div class="button-area">

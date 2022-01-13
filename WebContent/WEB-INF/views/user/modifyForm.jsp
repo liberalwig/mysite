@@ -2,8 +2,9 @@
 <%@ page import="com.javaex.vo.UserVo"%>
 <%
 UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
-UserVo userVo = (UserVo) request.getAttribute("userVo"); //from상선. 생각 못 했음.
+UserVo userVo = (UserVo) request.getAttribute("userVo");
 %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <!DOCTYPE html>
@@ -58,13 +59,15 @@ UserVo userVo = (UserVo) request.getAttribute("userVo"); //from상선. 생각 �
 
 							<!-- 아이디: 수정 폼에 들어가도 유지되어야 하고 안 지워지게 기입돼 있어야 하는 파트 -->
 							<div class="form-group">
-								<label class="form-text" for="input-uid">아이디</label> <span class="text-large bold"><%=userVo.getId()%></span>
+								<label class="form-text" for="input-uid">아이디</label> <span class="text-large bold">`</span>
 							</div>
+
+
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password"
-									value="<%=userVo.getPassword()%>" placeholder="비밀번호를 입력하세요"
+									value="${ userVo.id }" placeholder="비밀번호를 입력하세요"
 								>
 							</div>
 
@@ -72,7 +75,7 @@ UserVo userVo = (UserVo) request.getAttribute("userVo"); //from상선. 생각 �
 							<!-- 이름 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name"
-									value="<%=userVo.getName()%>" placeholder="이름을 입력하세요"
+									value="${ request.userVo.id }" placeholder="이름을 입력하세요"
 								>
 							</div>
 
@@ -102,8 +105,8 @@ UserVo userVo = (UserVo) request.getAttribute("userVo"); //from상선. 생각 �
 							</div>
 
 							<!-- 여기 인풋파트 왜 들어가는지 조금 더 이따 해보기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-							<input type="text" name="action" value="modify"> <input type="text" name="no" value="<%=userVo.getNo()%>">
-							<input type="text" name="id" value="<%=userVo.getId()%>">
+							<input type="text" name="action" value="modify"> <input type="text" name="no" value=" ${ request.userVo.no } ">
+							<input type="text" name="id" value=" ${ request.userVo.id } ">
 
 						</form>
 
