@@ -14,7 +14,7 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/assets/css/mysite.css" rel="stylesheet"
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" 
 	type="text/css">
 <link href="/mysite/assets/css/user.css" rel="stylesheet"
 	type="text/css">
@@ -41,8 +41,8 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 			%>
 			<ul>
 				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-				<li><a href="/mysite/user/" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
+				<li><a href="/mysite/main" class="btn_s">로그아웃</a></li>
+				<li><a href="/mysite/user?action=loginForm" class="btn_s">회원정보수정</a></li>
 			</ul>
 			<%
 			}

@@ -39,7 +39,7 @@ public class GuestbookDao {
 
 	}
 
-	// 리스트배열화 하는 이 파트 모르겠어서 복붙함
+	// 방명록 등록 이전 쭐쭐쭐 리스팅_리스트배열화 하는 이 파트 모르겠어서 복붙함
 	public List<GuestbookVo> getList() {
 		List<GuestbookVo> guestbookList = new ArrayList<GuestbookVo>();
 
@@ -68,9 +68,9 @@ public class GuestbookDao {
 				String name = rs.getString("name");
 				String password = rs.getString("password");
 				String content = rs.getString("content");
-				String regDate = rs.getString("reg_date");
+				String regdate = rs.getString("reg_date");
 
-				GuestbookVo guestbookVo = new GuestbookVo(no, name, password, content, regDate);
+				GuestbookVo guestbookVo = new GuestbookVo(no, name, password, content, regdate);
 				guestbookList.add(guestbookVo);
 			}
 

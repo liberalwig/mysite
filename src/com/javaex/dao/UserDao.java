@@ -84,7 +84,7 @@ public class UserDao {
 		return count;
 	}
 
-	// 회원 정보 1명 가져오기_세션 넣기 이전 과정
+	// 회원 정보 1명 가져오기: 로그인 용_(세션 넣기 이전 과정'?이라고 썼는데 무슨 말?)
 	public UserVo getUser(String id, String password) {
 
 		UserVo userVo = null;
@@ -133,4 +133,65 @@ public class UserDao {
 		return userVo;
 	}
 
+	// modify: 회원 정보 1개 가져와서 수정하기
+	public UserVo getUser(String id, String password) {
+
+		UserVo userVo = null;
+		
+		getConnection();
+
+		try {
+			// 3. SQL문 준비 / 바인딩 / 실행
+			// 문자열
+			String query = "";
+			query += " select no, ";
+			query += "        name ";
+			query += " from users ";
+			query += " where id = ? ";
+			query += " and password = ? ";
+			
+			
+			//문자열을 쿼리문으로
+			System.out.println(query);
+						
+			// 쿼리문
+			pstmt = conn.prepareStatement(query);
+
+			// 바인딩
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+
+			// 실행
+			rs = pstmt.executeQuery();
+
+			// 4. 결과처리
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String name = rs.getString("name"); //'정우성 님 환영합니다'를 안 보여주려면 이 행 안 쓰면 돼
+				//String id = rs.getString("id"); //회원정보 수정하고도 세션에 유지될 정보가 이름이 아니라 id이기 위해 위 가리고 이 행 생성
+				
+				userVo = new UserVo();
+				userVo.setNo(no);  //두 행의 세터 통해 정보 넣어줘
+				userVo.setName(name); //여기 불확실. password가 필요한 정보였어서 이렇게 썼는데 Dao는 위 query받을 거니까 name인가봐
+				//userVo.setId(id);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("error: " + e);
+		}
+
+		close();
+		return userVo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
