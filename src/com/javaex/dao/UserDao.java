@@ -133,8 +133,8 @@ public class UserDao {
 		return userVo;
 	}
 
-	/*// modify: 회원 정보 1개 가져와서 수정하기
-	public UserVo getUser(String id, String password) {
+	//modify: 회원 정보 1개 가져와서 수정하기
+	public UserVo getUser(int no) {
 
 		UserVo userVo = null;
 		
@@ -147,9 +147,7 @@ public class UserDao {
 			query += " select no, ";
 			query += "        name ";
 			query += " from users ";
-			query += " where id = ? ";
-			query += " and password = ? ";
-			
+			query += " where no = ? ";			
 			
 			//문자열을 쿼리문으로
 			System.out.println(query);
@@ -158,11 +156,10 @@ public class UserDao {
 			pstmt = conn.prepareStatement(query);
 
 			// 바인딩
-			pstmt.setString(1, id);
-			pstmt.setString(2, password);
+			pstmt.setInt(1, no);
 
 			// 실행
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeUpdate();
 
 			// 4. 결과처리
 			while (rs.next()) {
@@ -171,8 +168,8 @@ public class UserDao {
 				//String id = rs.getString("id"); //회원정보 수정하고도 세션에 유지될 정보가 이름이 아니라 id이기 위해 위 가리고 이 행 생성
 				
 				userVo = new UserVo();
-				userVo.setNo(no);  //두 행의 세터 통해 정보 넣어줘
-				userVo.setName(name); //여기 불확실. password가 필요한 정보였어서 이렇게 썼는데 Dao는 위 query받을 거니까 name인가봐
+				userVo.setPassword(password);  //두 행의 세터 통해 정보 넣어줘
+				userVo.setName(); //여기 불확실. password가 필요한 정보였어서 이렇게 썼는데 Dao는 위 query받을 거니까 name인가봐
 				//userVo.setId(id);
 			}
 
@@ -183,6 +180,6 @@ public class UserDao {
 		close();
 		return userVo;
 	}
-	*/
+	
 	
 }

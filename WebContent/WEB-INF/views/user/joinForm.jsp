@@ -16,13 +16,8 @@
 	<div id="wrap">
 
 		<div id="header" class="clearfix">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-
-		</div>
+		</div> <!-- //header+ //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -56,40 +51,39 @@
 
 							<!-- 아이디 -->
 							<div class="form-group">
-								<label class="form-text" for="input-uid">아이디</label> <input type="text" id="input-uid"
-									name="id" value="" placeholder="아이디를 입력하세요"
+								<label class="form-text" for="input-uid">아이디</label> <input type="text" id="input-uid" name="id" value=""
+									placeholder="아이디를 입력하세요"
 								>
 								<button type="button" id="">중복체크</button>
 							</div>
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
-								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass"
-									name="password" value="" placeholder="비밀번호를 입력하세요"
+								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password"
+									value="" placeholder="비밀번호를 입력하세요"
 								>
 							</div>
 
 							<!-- 이름 -->
 							<div class="form-group">
-								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name"
-									name="name" value="" placeholder="이름을 입력하세요"
+								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name" value=""
+									placeholder="이름을 입력하세요"
 								>
 							</div>
 
 							<!-- //성별 -->
 							<div class="form-group">
-								<span class="form-text">성별</span> <label for="rdo-male">남</label> <input type="radio"
-									id="rdo-male" name="gender" value="male"
-								> <label for="rdo-female">여</label> <input type="radio" id="rdo-female" name="gender"
-									value="female"
-								>
+								<span class="form-text">성별</span> <label for="rdo-male">남</label> <input type="radio" id="rdo-male"
+									name="gender" value="male"
+								> <label for="rdo-female">여</label> <input type="radio" id="rdo-female" name="gender" value="female">
 
 							</div>
 
 							<!-- 약관동의 -->
 							<div class="form-group">
-								<span class="form-text">약관동의</span> <input type="checkbox" id="chk-agree" value="" name="">
-								<label for="chk-agree">서비스약관에 동의합니다.</label>
+								<span class="form-text">약관동의</span> <input type="checkbox" id="chk-agree" value="" name=""> <label
+									for="chk-agree"
+								>서비스약관에 동의합니다.</label>
 							</div>
 
 							<!-- 버튼영역 -->
