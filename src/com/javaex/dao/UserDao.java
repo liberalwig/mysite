@@ -133,7 +133,7 @@ public class UserDao {
 		return userVo;
 	}
 
-	// modify: 회원 정보 1개 가져와서 수정하기
+	/*// modify: 회원 정보 1개 가져와서 수정하기
 	public UserVo getUser(String id, String password) {
 
 		UserVo userVo = null;
@@ -179,19 +179,10 @@ public class UserDao {
 		} catch (SQLException e) {
 			System.out.println("error: " + e);
 		}
-
+		
 		close();
 		return userVo;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	*/
 	
 }
