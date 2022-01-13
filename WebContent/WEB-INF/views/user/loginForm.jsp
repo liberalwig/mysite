@@ -1,8 +1,12 @@
 <!-- 2022.01.12(수)11:13수업 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.javaex.vo.UserVo"%>
-<% UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다 %>
-<% String result = request.getParameter("result"); //로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함. %>
+<%
+UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
+%>
+<%
+String result = request.getParameter("result"); //로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함.
+%>
 
 <!DOCTYPE html>
 <html>
@@ -20,37 +24,10 @@
 			<h1>
 				<a href="">MySite</a>
 			</h1>
-			<%
-			if (authUser == null) {//로그인 이전 or 로그인 실패
-			%>
-			<ul>
-				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
-				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
-			</ul>
-			<%
-			} else { //로그인 이후 성공 시
-			%>
-			<ul>
-				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-				<li><a href="/mysite/user/" class="btn_s">로그아웃</a></li>
-				<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
-			</ul>
-			<%
-			}
-			%>
+
+			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
 		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -84,14 +61,16 @@
 
 							<!-- 아이디 -->
 							<div class="form-group">
-								<label class="form-text" for="input-uid">아이디</label> <input 
-								type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
+								<label class="form-text" for="input-uid">아이디</label> <input type="text" id="input-uid"
+									name="id" value="" placeholder="아이디를 입력하세요"
+								>
 							</div>
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
-								<label class="form-text" for="input-pass">비밀번호</label> <input
-									type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요">
+								<label class="form-text" for="input-pass">비밀번호</label> <input type="text" id="input-pass"
+									name="password" value="" placeholder="비밀번호를 입력하세요"
+								>
 							</div>
 
 							<%
@@ -123,7 +102,7 @@
 		</div>
 		<!-- //container  -->
 
-		<div id="footer">Copyright ⓒ 2022 최승은. All right reserved</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>

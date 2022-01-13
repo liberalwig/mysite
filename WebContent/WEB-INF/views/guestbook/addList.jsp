@@ -2,9 +2,15 @@
 <%@ page import="com.javaex.vo.UserVo"%>
 <%@ page import="com.javaex.vo.GuestbookVo"%>
 <%@ page import="com.javaex.dao.GuestbookDao"%>
-<%@ page import="java.util.List"%> <!-- 이게 뭐지? -->
-<% UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다 %>
-<% List<GuestbookVo> guestbookList = (List<GuestbookVo>)request.getAttribute("gList"); %> <!-- 이게 뭐지? -->
+<%@ page import="java.util.List"%>
+<!-- 이게 뭐지? -->
+<%
+UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
+%>
+<%
+List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gList");
+%>
+<!-- 이게 뭐지? -->
 
 
 
@@ -35,38 +41,10 @@
 			</ul>
 			-->
 
-			<%
-				if (authUser == null) {//로그인 이전 or 로그인 실패
-				%>
-			<ul>
-				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
-				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
-			</ul>
-			<%
-				} else { //로그인 이후 성공 시
-				%>
-			<ul>
-				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-				<li><a href="/mysite/user?action=logout/" class="btn_s">로그아웃</a></li>
-				<li><a href="/mysitee/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
-			</ul>
-			<%
-				}
-				%>
+			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
 
 		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -116,8 +94,7 @@
 									<td><input id="input-pass" type="password" name="password"></td>
 								</tr>
 								<tr>
-									<td colspan="4"><textarea name="content" cols="72"
-											rows="5"></textarea></td>
+									<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
 								</tr>
 								<tr class="button-area">
 									<td colspan="4" class="text-center"><button type="submit">등록</button></td>
@@ -132,9 +109,7 @@
 
 
 					<%
-					
-					for(int i = 0; i<guestbookList.size(); i++) {
-						
+					for (int i = 0; i < guestbookList.size(); i++) {
 					%>>
 
 					<table class="guestRead">
@@ -145,9 +120,10 @@
 							<col style="width: 10%;">
 						</colgroup>
 						<tr>
-							<td><%= guestbookList.get(i).getNo() %></td><!-- 정해진 이정재 말고 db에 있는 자료 -->
-							<td><%= guestbookList.get(i).getName() %></td>
-							<td><%= guestbookList.get(i).getRegdate() %></td>
+							<td><%=guestbookList.get(i).getNo()%></td>
+							<!-- 정해진 이정재 말고 db에 있는 자료 -->
+							<td><%=guestbookList.get(i).getName()%></td>
+							<td><%=guestbookList.get(i).getRegdate()%></td>
 							<td><a href="">[삭제]</a></td>
 						</tr>
 						<tr>
@@ -174,7 +150,8 @@
 						</tr>
 					</table>
 
-					<% }
+					<%
+					}
 					%>
 
 					<!-- //guestRead -->
@@ -187,7 +164,7 @@
 		</div>
 		<!-- //container  -->
 
-		<div id="footer">Copyright ⓒ 2022 최승은. All right reserved</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->

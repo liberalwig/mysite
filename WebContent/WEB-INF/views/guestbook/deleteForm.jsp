@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.javaex.vo.UserVo"%>
-<% UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다 %>
+<%
+UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/css/mysite.css" rel="stylesheet" type="text/css"> 
+<link href="/mysite/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -20,38 +22,9 @@
 				<a href="">MySite</a>
 			</h1>
 
-
-				<%
-				if (authUser == null) {//로그인 이전 or 로그인 실패
-				%>
-				<ul>
-					<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
-					<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
-				</ul>
-				<%
-				} else { //로그인 이후 성공 시
-				%>
-				<ul>
-					<li><%=authUser.getName()%> 님 안녕하세요^^</li>
-					<li><a href="/mysite/user?action=logout" class="btn_s">로그아웃</a></li>
-					<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
-				</ul>
-				<%
-				}
-				%>
+			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
 		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -97,8 +70,7 @@
 								<td><a href="/mysite/main">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value=""> <input
-							type='hidden' name="" value="">
+						<input type='hidden' name="" value=""> <input type='hidden' name="" value="">
 					</form>
 
 				</div>
@@ -109,7 +81,7 @@
 		</div>
 		<!-- //container  -->
 
-		<div id="footer">Copyright ⓒ 2022 최승은. All right reserved</div>
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 
 	</div>
