@@ -19,11 +19,12 @@ UserVo userVo = (UserVo) request.getAttribute("userVo"); //from상선. 생각 �
 </head>
 
 <body>
-		<div id="wrap">
+	<div id="wrap">
 
 		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-		</div> <!-- //header+ //nav -->
+		</div>
+		<!-- //header+ //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -35,78 +36,91 @@ UserVo userVo = (UserVo) request.getAttribute("userVo"); //from상선. 생각 �
 				</ul>
 			</div>
 			<!-- //aside -->
-		<div id="content">
+			<div id="content">
 
-			<div id="content-head">
-				<h3>회원정보</h3>
-				<div id="location">
-					<ul>
-						<li>홈</li>
-						<li>회원</li>
-						<li class="last">회원정보</li>
-					</ul>
+				<div id="content-head">
+					<h3>회원정보</h3>
+					<div id="location">
+						<ul>
+							<li>홈</li>
+							<li>회원</li>
+							<li class="last">회원정보</li>
+						</ul>
+					</div>
+					<div class="clear"></div>
 				</div>
-				<div class="clear"></div>
-			</div>
-			<!-- //content-head -->
+				<!-- //content-head -->
 
-			<div id="user">
-				<div id="modifyForm">
-					<form action="" method="">
+				<div id="user">
+					<div id="modifyForm">
+						<form action="/mysite/user" method="get">
+							<input type="hidden" name="action" value="modify"> <input type="hidden" name="id" value="${userVo.id}">
 
-						<!-- 아이디: 수정 폼에 들어가도 유지되어야 하고 안 지워지게 기입돼 있어야 하는 파트 -->
-						<div class="form-group">
-							<label class="form-text" for="input-uid">아이디</label> <span class="text-large bold"><%=userVo.getId()%></span>
-						</div>
+							<!-- 아이디: 수정 폼에 들어가도 유지되어야 하고 안 지워지게 기입돼 있어야 하는 파트 -->
+							<div class="form-group">
+								<label class="form-text" for="input-uid">아이디</label> <span class="text-large bold"><%=userVo.getId()%></span>
+							</div>
 
-						<!-- 비밀번호 -->
-						<div class="form-group">
-							<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password"
-								value="<%=userVo.getPassword()%>" placeholder="비밀번호를 입력하세요"
-							>
-						</div>
+							<!-- 비밀번호 -->
+							<div class="form-group">
+								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password"
+									value="<%=userVo.getPassword()%>" placeholder="비밀번호를 입력하세요"
+								>
+							</div>
 
 
-						<!-- 이름 -->
-						<div class="form-group">
-							<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name"
-								value="<%=userVo.getName()%>" placeholder="이름을 입력하세요"
-							>
-						</div>
+							<!-- 이름 -->
+							<div class="form-group">
+								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name"
+									value="<%=userVo.getName()%>" placeholder="이름을 입력하세요"
+								>
+							</div>
 
-						<!-- //젠더 -->
-						<div class="form-group">
-							<span class="form-text">성별</span> <label for="rdo-male">남</label> <input type="radio" id="rdo-male" name="남성"
-								value=""
-							> <label for="rdo-female">여</label> <input type="radio" id="rdo-female" name="여성" value="">
+							<!-- //젠더 -->
+							<div class="form-group">
+								<span class="form-text">성별</span>
 
-						</div>
 
-						<!-- 버튼영역 -->
-						<div class="button-area">
-							<button type="submit" id="btn-submit">회원정보수정</button>
-						</div>
 
-						<!-- 여기 인풋파트 왜 들어가는지 조금 더 이따 해보기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						<input type="text" name="action" value="modify"> <input type="text" name="no" value="<%=userVo.getNo()%>">
-						<input type="text" name="id" value="<%=userVo.getId()%>">
+								<c:choose>
+									<c:when test=""${ userVo.gender == male}">
+										<label for="rdo-male">남</label>
+										<input type="radio" id="rdo-male" name="male" checked>
+									</c:when>
 
-					</form>
+									<c:otherwise>
+										<label for="rdo-male">여</label>
+										<input type="radio" id="rdo-male" fename="male" checked>
+									</c:otherwise>
+								</c:choose>
+
+							</div>
+
+							<!-- 버튼영역 -->
+							<div class="button-area">
+								<button type="submit" id="btn-submit">회원정보수정</button>
+							</div>
+
+							<!-- 여기 인풋파트 왜 들어가는지 조금 더 이따 해보기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+							<input type="text" name="action" value="modify"> <input type="text" name="no" value="<%=userVo.getNo()%>">
+							<input type="text" name="id" value="<%=userVo.getId()%>">
+
+						</form>
+
+					</div>
+					<!-- //modifyForm -->
 
 				</div>
-				<!-- //modifyForm -->
+				<!-- //user -->
 
 			</div>
-			<!-- //user -->
+			<!-- //content  -->
 
 		</div>
-		<!-- //content  -->
+		<!-- //container  -->
 
-	</div>
-	<!-- //container  -->
-
-	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-	<!-- //footer -->
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		<!-- //footer -->
 
 	</div>
 	<!-- //wrap -->

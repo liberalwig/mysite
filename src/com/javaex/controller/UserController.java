@@ -20,15 +20,16 @@ public class UserController extends HttpServlet {
 			throws ServletException, IOException {
 
 		System.out.println("/user");
-
 		String action = request.getParameter("action");
 
+		// 회원가입 폼
 		if ("joinForm".equals(action)) {
 			System.out.println("/user > joinForm");
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
 
+			// 회원가입 과정
 		} else if ("join".equals(action)) {
 			System.out.println("user > join");
 
@@ -44,21 +45,23 @@ public class UserController extends HttpServlet {
 
 			// UserDao의 insert()로 저장하기 (회원에겐 가입하기)
 			UserDao userDao = new UserDao();
-			int count = userDao.insert(userVo);
+
+			userDao.insert(userVo);
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinOk.jsp");
 
 		}
 
+		// 로그인 폼
 		else if ("loginForm".equals(action)) {
 			System.out.println("user > loginForm");
 
-			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/loginForm.jsp");
 
 		}
 
+		// 로그인 과정
 		else if ("login".equals(action)) {
 			System.out.println("user > login");
 
@@ -70,7 +73,7 @@ public class UserController extends HttpServlet {
 
 			UserDao userDao = new UserDao();
 			UserVo authVo = userDao.getUser(id, password);// authVo: 인증성공한 유저
-			// 데이터 있으면 =>어트리뷰트 session authVo에 넣고: 로그인 성공!
+			// 데이터 있으면 =>어트리뷰트 session authVo이라는 장소에 로그인 정보값 넣어져 있으므로: 로그인 성공!
 			// 데이터 null이면 => userVo에 그대로. 아무 것도 안 한다: 로그인 실패
 
 			if (authVo == null) {// 로그인 실패
@@ -82,7 +85,7 @@ public class UserController extends HttpServlet {
 				System.out.println("로그인 성공");
 
 				HttpSession session = request.getSession(); // 세션값을 메모리에 넣어줘
-				session.setAttribute("authUser", authVo); // 만일 여기서 rqst.setAttribute라 하면 세션메모리를 위에서 만들어 놓고 안 쓰는 격
+				session.setAttribute("authUser", authVo); // 호출할 이름과 넣을 변수
 
 				WebUtil.redirect(request, response, "/mysite/main");
 
@@ -95,42 +98,69 @@ public class UserController extends HttpServlet {
 			}
 		}
 
+		// 로그아웃
 		else if ("logout".equals(action)) {
 			System.out.println("user > logout");
 
 			HttpSession session = request.getSession();
 			session.removeAttribute("authUser");
 			session.invalidate();
-			
+
 			WebUtil.redirect(request, response, "/mysite/main");
 		}
 
+		// 수정 폼
 		else if ("modifyForm".equals(action)) {
 			System.out.println("user > modifyForm");
 
-			
-			//현재로그인된 넘버를 파라미터로 정보뽑아오세요
-			//no에 묶여있는 모든 정보 가져와 => dao에 넘버만 넣어서 걔 데이터를 가져와주는 메소드를 만들어야 해
-			//UserVo에 넣는다
-			
-			
-			//UserVo에 들어가서 request. setAttribute("Uservo" , userVo)
-			
-			
-			
-			
-			WebUtil.forward(request, response, "WEB-INF/view/user/modifyForm.jsp"); //modifyForm화면을 띄워준다
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
 
-			
-			
-		} //else if ("modify".equals(action)) {
-			//UserVo userVo = userDao.Update(no);
-		//}
-		
-		
+			int no = authUser.getNo(); // 세션에 있는 authUser에 No저장해서 정수형 no에 담아
+
+			UserDao userDao = new UserDao();
+			UserVo userVo = userDao.getUser(no);
+
+			request.setAttribute("userVo", userVo); // UserVo에 들어가서 request. setAttribute("Uservo" , userVo)
+
+			// 현재로그인된 넘버를 파라미터로 정보뽑아오세요
+			// no에 묶여있는 모든 정보 가져와 => dao에 넘버만 넣어서 걔 데이터를 가져와주는 메소드를 만들어야 해
+			// UserVo에 넣는다
+
+			WebUtil.forward(request, response, "WEB-INF/view/user/modifyForm.jsp"); // modifyForm화면을 띄워준다
+
+			// 수정 과정
+		} else if ("modify".equals(action)) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			String id = request.getParameter("id");
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+
+			UserVo userVo = new UserVo(no, id, password, name, gender);
+			UserDao userDao = new UserDao();
+
+			System.out.println(userVo);
+
+			userDao.Update(userVo);
+			UserVo authVo = new UserVo();
+			authVo.setNo(userVo.getNo());
+			authVo.setName(userVo.getName());
+
+			HttpSession session = request.getSession(); // 세션값을 메모리에 넣어줘
+			session.setAttribute("authUser", authVo);// 호출할 이름과 넣을 변수
+			System.out.println(authVo);
+
+			WebUtil.redirect(request, response, "/mysite/main");
+
+		}
+
+		// 이외 오류
+		else {
+			System.out.println("파라미터 없음");
+		}
+
 	}
-
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
