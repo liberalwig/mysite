@@ -16,7 +16,8 @@ import com.javaex.vo.GuestbookVo;
 
 @WebServlet("/guest")
 public class GuestbookController extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		System.out.println("/guest"); // 접속 양호 확인
 
@@ -29,6 +30,7 @@ public class GuestbookController extends HttpServlet {
 			request.setAttribute("gList", guestbookList);
 
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/addList.jsp");
+
 			
 		} else if ("add".equals(action)) {
 			String name = request.getParameter("name");
@@ -41,22 +43,22 @@ public class GuestbookController extends HttpServlet {
 			guestbookDao.guestbookInsert(guestbookVo);
 
 			WebUtil.redirect(request, response, "/mysite/guest?action=addList");
-		}
-
-		else if ("deleteForm".equals(action)) {
+		
+			
+		} else if ("deleteForm".equals(action)) {
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
-		}
+		
+		
+		} else if ("delete".equals(action)) {
+		
 
-		else if ("delete".equals(action)) {
-
-		}
-
-		else {
+		} else { // 주소창에 local...mysite/guest 치면 이렇게 돼
 			System.out.println("파라미터 없음");
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

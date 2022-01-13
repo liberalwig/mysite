@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.javaex.vo.UserVo"%>
+<% UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/css/mysite.css" rel="stylesheet" type="text/css"> 
 <link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -18,18 +20,26 @@
 				<a href="">MySite</a>
 			</h1>
 
-			<!-- 
-			<ul>
-				<li>최승은 님 안녕하세요^^</li>
-				<li><a href="" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
-			</ul>
-			-->	
-			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
-			</ul>
-			
+
+				<%
+				if (authUser == null) {//로그인 이전 or 로그인 실패
+				%>
+				<ul>
+					<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
+					<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
+				</ul>
+				<%
+				} else { //로그인 이후 성공 시
+				%>
+				<ul>
+					<li><%=authUser.getName()%> 님 안녕하세요^^</li>
+					<li><a href="/mysite/user?action=logout" class="btn_s">로그아웃</a></li>
+					<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
+				</ul>
+				<%
+				}
+				%>
+
 		</div>
 		<!-- //header -->
 
@@ -48,13 +58,13 @@
 				<h2>방명록</h2>
 				<ul>
 					<li>일반방명록</li>
-					<li>ajax방명록</li>
+					<li>방명록</li>
 				</ul>
 			</div>
 			<!-- //aside -->
 
 			<div id="content">
-			
+
 				<div id="content-head">
 					<h3>일반방명록</h3>
 					<div id="location">
@@ -67,7 +77,10 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-	
+
+
+
+
 				<div id="guestbook">
 					<form action="" method="">
 						<table id="guestDelete">
@@ -81,13 +94,13 @@
 								<td>비밀번호</td>
 								<td><input type="password" name="pass"></td>
 								<td class="text-left"><button type="submit">삭제</button></td>
-								<td><a href="/guestbook2/gbc">[메인으로 돌아가기]</a></td>
+								<td><a href="/mysite/main">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value="">
-						<input type='hidden' name="" value="">
+						<input type='hidden' name="" value=""> <input
+							type='hidden' name="" value="">
 					</form>
-					
+
 				</div>
 				<!-- //guestbook -->
 			</div>
@@ -95,10 +108,8 @@
 
 		</div>
 		<!-- //container  -->
-		
-		<div id="footer">
-			Copyright ⓒ 2020 최승은. All right reserved
-		</div>
+
+		<div id="footer">Copyright ⓒ 2022 최승은. All right reserved</div>
 		<!-- //footer -->
 
 	</div>

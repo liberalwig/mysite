@@ -78,7 +78,7 @@ public class UserController extends HttpServlet {
 
 				WebUtil.redirect(request, response, "/mysite/user?action=loginForm&result=fail");
 
-			} else {
+			} else {// 로그인 성공
 				System.out.println("로그인 성공");
 
 				HttpSession session = request.getSession(); // 세션값을 메모리에 넣어줘
@@ -105,6 +105,29 @@ public class UserController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite/main");
 		}
 
+		else if ("modifyForm".equals(action)) {
+			System.out.println("user > modifyForm");
+
+			
+			//현재로그인된 넘버를 파라미터로 정보뽑아오세요
+			//no에 묶여있는 모든 정보 가져와 => dao에 넘버만 넣어서 걔 데이터를 가져와주는 메소드를 만들어야 해
+			//UserVo에 넣는다
+			
+			
+			//UserVo에 들어가서 request. setAttribute("Uservo" , userVo)
+			
+			
+			
+			
+			WebUtil.forward(request, response, "WEB-INF/view/user/modifyForm.jsp"); //modifyForm화면을 띄워준다
+
+			
+			
+		} //else if ("modify".equals(action)) {
+			//UserVo userVo = userDao.Update(no);
+		//}
+		
+		
 	}
 
 	

@@ -1,14 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/assets/css/mysite.css" rel="stylesheet"
-	type="text/css">
-<link href="/mysite/assets/css/user.css" rel="stylesheet"
-	type="text/css">
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -20,9 +20,6 @@
 				<a href="">MySite</a>
 			</h1>
 
-			
-
-
 			<!-- 
 			<ul>
 				<li>최승은 님 안녕하세요^^</li>
@@ -30,10 +27,12 @@
 				<li><a href="" class="btn_s">회원정보수정</a></li>
 			</ul>
 			-->
+
 			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
+				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
 			</ul>
+
 
 		</div>
 		<!-- //header -->
@@ -81,23 +80,20 @@
 							<!-- 아이디 -->
 							<div class="form-group">
 								<label class="form-text" for="input-uid">아이디</label> <input
-									type="text" id="input-uid" name="id" value=""
-									placeholder="아이디를 입력하세요">
+									type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
 								<button type="button" id="">중복체크</button>
 							</div>
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">패스워드</label> <input
-									type="text" id="input-pass" name="password" value=""
-									placeholder="비밀번호를 입력하세요">
+									type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요">
 							</div>
 
 							<!-- 이름 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> <input
-									type="text" id="input-name" name="name" value=""
-									placeholder="이름을 입력하세요">
+									type="text" id="input-name" name="name" value="" placeholder="이름을 입력하세요">
 							</div>
 
 							<!-- //성별 -->
@@ -113,8 +109,7 @@
 							<!-- 약관동의 -->
 							<div class="form-group">
 								<span class="form-text">약관동의</span> <input type="checkbox"
-									id="chk-agree" value="" name=""> <label for="chk-agree">서비스
-									약관에 동의합니다.</label>
+									id="chk-agree" value="" name=""> <label for="chk-agree">서비스약관에 동의합니다.</label>
 							</div>
 
 							<!-- 버튼영역 -->
@@ -139,7 +134,7 @@
 		</div>
 		<!-- //container  -->
 
-		<div id="footer">Copyright ⓒ 2020 최승은. All right reserved</div>
+		<div id="footer">Copyright ⓒ 2022 최승은. All right reserved</div>
 		<!-- //footer -->
 
 	</div>

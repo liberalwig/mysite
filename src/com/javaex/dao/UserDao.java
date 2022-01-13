@@ -117,10 +117,12 @@ public class UserDao {
 			while (rs.next()) {
 				int no = rs.getInt("no");
 				String name = rs.getString("name"); //'정우성 님 환영합니다'를 안 보여주려면 이 행 안 쓰면 돼
-
+				//String id = rs.getString("id"); //회원정보 수정하고도 세션에 유지될 정보가 이름이 아니라 id이기 위해 위 가리고 이 행 생성
+				
 				userVo = new UserVo();
 				userVo.setNo(no);  //두 행의 세터 통해 정보 넣어줘
 				userVo.setName(name); //여기 불확실. password가 필요한 정보였어서 이렇게 썼는데 Dao는 위 query받을 거니까 name인가봐
+				//userVo.setId(id);
 			}
 
 		} catch (SQLException e) {

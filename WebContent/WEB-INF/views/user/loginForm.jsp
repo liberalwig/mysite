@@ -1,20 +1,16 @@
 <!-- 2022.01.12(수)11:13수업 -->
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%
-String result = request.getParameter("result"); //로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함.
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.javaex.vo.UserVo"%>
+<% UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다 %>
+<% String result = request.getParameter("result"); //로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함. %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/assets/css/mysite.css" rel="stylesheet"
-	type="text/css">
-<link href="/mysite/assets/css/user.css" rel="stylesheet"
-	type="text/css">
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -24,12 +20,24 @@ String result = request.getParameter("result"); //로그인 시도 후 실패 �
 			<h1>
 				<a href="">MySite</a>
 			</h1>
-
-
+			<%
+			if (authUser == null) {//로그인 이전 or 로그인 실패
+			%>
 			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
+				<li><a href="/mysite/user?action=loginForm" class="btn_s">로그인</a></li>
+				<li><a href="/mysite/user?action=joinForm" class="btn_s">회원가입</a></li>
 			</ul>
+			<%
+			} else { //로그인 이후 성공 시
+			%>
+			<ul>
+				<li><%=authUser.getName()%> 님 안녕하세요^^</li>
+				<li><a href="/mysite/user/" class="btn_s">로그아웃</a></li>
+				<li><a href="/mysite/user?action=modifyForm" class="btn_s">회원정보수정</a></li>
+			</ul>
+			<%
+			}
+			%>
 
 		</div>
 		<!-- //header -->
@@ -76,28 +84,24 @@ String result = request.getParameter("result"); //로그인 시도 후 실패 �
 
 							<!-- 아이디 -->
 							<div class="form-group">
-								<label class="form-text" for="input-uid">아이디</label> <input
-									type="text" id="input-uid" name="id" value=""
-									placeholder="아이디를 입력하세요">
+								<label class="form-text" for="input-uid">아이디</label> <input 
+								type="text" id="input-uid" name="id" value="" placeholder="아이디를 입력하세요">
 							</div>
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
 								<label class="form-text" for="input-pass">비밀번호</label> <input
-									type="text" id="input-pass" name="password" value=""
-									placeholder="비밀번호를 입력하세요">
+									type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요">
 							</div>
-
-
 
 							<%
 							if ("fail".equals(result)) {
 							%>
-							<p>로그인에 실패했습니다. 다시 로그인 해주세요.</p> <!--로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함-->
+							<p>로그인에 실패했습니다. 다시 로그인 해주세요.</p>
+							<!--로그인 시도 후 실패 시에는 파라미터에 result=fail이라는 꼬랑지를 달아주기로 함-->
 							<%
 							}
 							%>
-
 
 							<!-- 버튼영역 -->
 							<div class="button-area">
@@ -119,7 +123,7 @@ String result = request.getParameter("result"); //로그인 시도 후 실패 �
 		</div>
 		<!-- //container  -->
 
-		<div id="footer">Copyright ⓒ 2020 최승은. All right reserved</div>
+		<div id="footer">Copyright ⓒ 2022 최승은. All right reserved</div>
 		<!-- //footer -->
 
 	</div>
