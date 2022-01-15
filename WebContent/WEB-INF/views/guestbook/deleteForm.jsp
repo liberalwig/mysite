@@ -20,12 +20,7 @@ UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오
 	<div id="wrap">
 
 		<div id="header" class="clearfix">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-
 		</div>
 
 		<div id="container" class="clearfix">
@@ -39,7 +34,6 @@ UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오
 			<!-- //aside -->
 
 			<div id="content">
-
 				<div id="content-head">
 					<h3>일반방명록</h3>
 					<div id="location">
@@ -52,9 +46,6 @@ UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-
-
-
 
 				<div id="guestbook">
 					<form action="" method="">

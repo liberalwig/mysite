@@ -39,6 +39,20 @@ public class GuestbookDao {
 
 	}
 
+	// 5.자원 정리 _ close();정의
+	private void close() {
+		try {
+			if (pstmt != null) {
+				pstmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			System.out.println("error." + e);
+		}
+	}
+
 	// 방명록 등록 이전 쭐쭐쭐 리스팅_리스트배열화 하는 이 파트 모르겠어서 복붙함
 	public List<GuestbookVo> getList() {
 		List<GuestbookVo> guestbookList = new ArrayList<GuestbookVo>();
@@ -52,7 +66,7 @@ public class GuestbookDao {
 			query += "          ,name ";
 			query += "          ,password ";
 			query += "          ,content ";
-			query += "          ,to_char(reg_date, 'YYYY-MM-DD HH:MI:SS') reg_date ";
+			query += "          ,to_char(reg_date, 'YY-MM-DD HH:MI:SS') reg_date ";
 			query += " from     guestbook ";
 			query += " order by reg_date desc ";
 
@@ -80,20 +94,6 @@ public class GuestbookDao {
 
 		close();
 		return guestbookList;
-	}
-
-	// 5.자원 정리 _ close();정의
-	private void close() {
-		try {
-			if (pstmt != null) {
-				pstmt.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			System.out.println("error." + e);
-		}
 	}
 
 	// 방명록 등록
@@ -130,7 +130,7 @@ public class GuestbookDao {
 	}
 
 	// 방명록 삭제
-	public int delete(int number, String password) {
+	public int guestbookDelete(int number, String password) {
 		int count = 0;
 		getConnection();
 
@@ -158,7 +158,7 @@ public class GuestbookDao {
 		}
 
 		close();
-		return count; // 위에 변수 잡아놔서 일단 둠
+		return count;
 
 	}
 

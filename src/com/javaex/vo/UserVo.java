@@ -10,7 +10,6 @@ public class UserVo {
 	private String gender;
 
 	// 생성자
-
 	public UserVo() {
 
 	}

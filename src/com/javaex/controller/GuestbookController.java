@@ -19,11 +19,12 @@ public class GuestbookController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("/guest"); // 접속 양호 확인
-
+		System.out.println("/guest");
 		String action = request.getParameter("action");
 
 		if ("addList".equals(action)) {
+			System.out.println("guest > addList");
+			
 			GuestbookDao guestbookDao = new GuestbookDao();
 			List<GuestbookVo> guestbookList = guestbookDao.getList();
 
@@ -33,6 +34,8 @@ public class GuestbookController extends HttpServlet {
 
 			
 		} else if ("add".equals(action)) {
+			System.out.println("guest > add");
+			
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String content = request.getParameter("content");
@@ -46,13 +49,22 @@ public class GuestbookController extends HttpServlet {
 		
 			
 		} else if ("deleteForm".equals(action)) {
+			System.out.println("guest > deletForm");
+			
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
 		
 		
 		} else if ("delete".equals(action)) {
+			System.out.println("guest > delete");
 		
+			int no = Integer.parseInt(request.getParameter("no"));
+			String password = request.getParameter("password");
+			
+			new GuestbookDao().guestbookDelete(no, password);
 
-		} else { // 주소창에 local...mysite/guest 치면 이렇게 돼
+			WebUtil.redirect(request, response, "/mysite/guest?action=addList");	
+
+		} else {
 			System.out.println("파라미터 없음");
 		}
 	}

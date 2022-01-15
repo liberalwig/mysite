@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.javaex.vo.UserVo"%>
-<%
-UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
-UserVo userVo = (UserVo) request.getAttribute("userVo");
-%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.javaex.vo.UserVo"%>
 
 
 <!DOCTYPE html>
@@ -16,16 +12,15 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 <link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
 
-
 </head>
 
 <body>
 	<div id="wrap">
-
+		
 		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		</div>
-		<!-- //header+ //nav -->
+		<!-- //header + //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -37,6 +32,7 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 				</ul>
 			</div>
 			<!-- //aside -->
+			
 			<div id="content">
 
 				<div id="content-head">
@@ -55,19 +51,20 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 				<div id="user">
 					<div id="modifyForm">
 						<form action="/mysite/user" method="get">
-							<input type="hidden" name="action" value="modify"> <input type="hidden" name="id" value="${userVo.id}">
+							<input type="hidden" name="action" value="modify"> <input type="hidden" name="id"
+								value="${requestuserVo.id}"
+							>
 
 							<!-- 아이디: 수정 폼에 들어가도 유지되어야 하고 안 지워지게 기입돼 있어야 하는 파트 -->
 							<div class="form-group">
-								<label class="form-text" for="input-uid">아이디</label> <span class="text-large bold">`</span>
+								<label class="form-text" for="input-uid">아이디</label> <span class="text-large bold" ${requestScope.userVo.id}></span>
 							</div>
-
 
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
-								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password"
-									value="${ userVo.id }" placeholder="비밀번호를 입력하세요"
+								<label class="form-text" for="input-pass">패스워드</label> <input type="password" id="input-pass" name="password"
+									value="${requestScope.userVo.password}" placeholder="비밀번호를 입력하세요"
 								>
 							</div>
 
@@ -75,7 +72,7 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 							<!-- 이름 -->
 							<div class="form-group">
 								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name"
-									value="${ request.userVo.id }" placeholder="이름을 입력하세요"
+									value="${requestScope.userVo.name}"  placeholder="이름을 입력하세요"
 								>
 							</div>
 
@@ -83,17 +80,20 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 							<div class="form-group">
 								<span class="form-text">성별</span>
 
-
-
 								<c:choose>
-									<c:when test=""${ userVo.gender == male}">
+									<c:when test="${requestScope.userVo.gender == 'female'}">
 										<label for="rdo-male">남</label>
-										<input type="radio" id="rdo-male" name="male" checked>
-									</c:when>
+										<input type="radio" id="rdo-male" name="gender" value="male" >
+										<label for="rdo-female">여</label>
+										<input type="radio" id="rdo-female" name="gender" value="female" checked="checked">
 
+									</c:when>
 									<c:otherwise>
-										<label for="rdo-male">여</label>
-										<input type="radio" id="rdo-male" fename="male" checked>
+										<label for="rdo-male">남</label>
+										<input type="radio" id="rdo-male" name="gender" value="male" checked="checked">
+
+										<label for="rdo-female">여</label>
+										<input type="radio" id="rdo-female" name="gender" value="female">
 									</c:otherwise>
 								</c:choose>
 
@@ -104,9 +104,8 @@ UserVo userVo = (UserVo) request.getAttribute("userVo");
 								<button type="submit" id="btn-submit">회원정보수정</button>
 							</div>
 
-							<!-- 여기 인풋파트 왜 들어가는지 조금 더 이따 해보기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-							<input type="text" name="action" value="modify"> <input type="text" name="no" value=" ${ request.userVo.no } ">
-							<input type="text" name="id" value=" ${ request.userVo.id } ">
+							<input type="text" name="action" value="modify">  <input type="text" name="no" value="${requestScope.userVo.no}"> 
+							<input type="text" name="id" value="${requestScopeScope.userVo.id}">
 
 						</form>
 

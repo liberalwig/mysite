@@ -3,11 +3,8 @@
 <%@ page import="com.javaex.vo.GuestbookVo"%>
 <%@ page import="com.javaex.dao.GuestbookDao"%>
 <%@ page import="java.util.List"%>
-<!-- 이게 뭐지? -->
 <%
-UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
-%>
-<%
+UserVo authUser = (UserVo)session.getAttribute("authUser"); 
 List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gList");
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -27,9 +24,8 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 <body>
 	<div id="wrap">
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-
-
 	</div>
+	<!-- //head+//nav -->
 
 	<div id="container" class="clearfix">
 		<div id="aside">
@@ -42,7 +38,6 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 		<!-- //aside -->
 
 		<div id="content">
-
 			<div id="content-head" class="clearfix">
 				<h3>일반방명록</h3>
 				<div id="location">
@@ -55,13 +50,8 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 			</div>
 			<!-- //content-head -->
 
-
-
-
-
-
 			<div id="guestbook">
-				<form action="" method="">
+				<form action="" method="get">
 					<table id="guestAdd">
 						<colgroup>
 							<col style="width: 70px;">
@@ -71,16 +61,17 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 						</colgroup>
 						<tbody>
 							<tr>
-								<th><label class="form-text" for="input-uname">이름</label>
-								</td>
+								<th><label class="form-text" for="input-uname">이름</label></th>
 								<td><input id="input-uname" type="text" name="name"></td>
-								<th><label class="form-text" for="input-pass">패스워드</label>
-								</td>
+								
+								<th><label class="form-text" for="input-pass">패스워드</label></th>
 								<td><input id="input-pass" type="password" name="password"></td>
 							</tr>
+							
 							<tr>
 								<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
 							</tr>
+							
 							<tr class="button-area">
 								<td colspan="4" class="text-center"><button type="submit">등록</button></td>
 							</tr>
@@ -88,13 +79,13 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 
 					</table>
 					<!-- //guestWrite -->
-					<input type="hidden" name="action" value="add">
+					<input type="hidden" name="action" value="add"><input type="hidden" name="action" value="add"><!-- @@@@@@@@@@@@@@@@@@@@@@@@@왜 두번? -->
+					
 
 				</form>
 
 
-				<c:foreach items=" ${ requestScope.gList } var= "vo" varstatus="status" >
-
+				<c:foreach items="${requestScope.gList}" var="vo">
 					<table class="guestRead">
 						<colgroup>
 							<col style="width: 10%;">
@@ -104,13 +95,12 @@ List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gLis
 						</colgroup>
 						<tr>
 							<td>${ vo.no }</td>
-							<!-- 정해진 이정재 말고 db에 있는 자료 -->
 							<td>${ vo.name }</td>
 							<td>${ vo.regDate }</td>
-							<td><a href="/mysite/guest?action=delte?no=${ vo.no }">[삭제]</a></td>
+							<td><a href="/mysite/guest?action=delteForm?no=${vo.no}">[삭제]</a></td>
 						</tr>
 						<tr>
-							<td colspan=4 class="text-left">${ vo.content }</td>
+							<td colspan=4 class="text-left">${vo.content}</td>
 						</tr>
 					</table>
 				</c:foreach>

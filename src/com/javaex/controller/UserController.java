@@ -2,6 +2,7 @@
 package com.javaex.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +17,12 @@ import com.javaex.vo.UserVo;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		System.out.println("/user");
+		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
 		// 회원가입 폼
@@ -30,6 +33,7 @@ public class UserController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
 
 			// 회원가입 과정
+
 		} else if ("join".equals(action)) {
 			System.out.println("user > join");
 
@@ -72,11 +76,11 @@ public class UserController extends HttpServlet {
 			System.out.println(password);
 
 			UserDao userDao = new UserDao();
-			UserVo authVo = userDao.getUser(id, password);// authVo: 인증성공한 유저
+			UserVo authUser = userDao.getUser(id, password);// authVo: 인증성공한 유저
 			// 데이터 있으면 =>어트리뷰트 session authVo이라는 장소에 로그인 정보값 넣어져 있으므로: 로그인 성공!
 			// 데이터 null이면 => userVo에 그대로. 아무 것도 안 한다: 로그인 실패
 
-			if (authVo == null) {// 로그인 실패
+			if (authUser == null) {// 로그인 실패
 				System.out.println("로그인 실패");
 
 				WebUtil.redirect(request, response, "/mysite/user?action=loginForm&result=fail");
@@ -85,7 +89,7 @@ public class UserController extends HttpServlet {
 				System.out.println("로그인 성공");
 
 				HttpSession session = request.getSession(); // 세션값을 메모리에 넣어줘
-				session.setAttribute("authUser", authVo); // 호출할 이름과 넣을 변수
+				session.setAttribute("authUser", authUser); // 호출할 이름과 넣을 변수
 
 				WebUtil.redirect(request, response, "/mysite/main");
 
@@ -127,11 +131,11 @@ public class UserController extends HttpServlet {
 			// no에 묶여있는 모든 정보 가져와 => dao에 넘버만 넣어서 걔 데이터를 가져와주는 메소드를 만들어야 해
 			// UserVo에 넣는다
 
-			WebUtil.forward(request, response, "WEB-INF/view/user/modifyForm.jsp"); // modifyForm화면을 띄워준다
+			WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp"); // modifyForm화면을 띄워준다
 
 			// 수정 과정
 		} else if ("modify".equals(action)) {
-			int no = Integer.parseInt(request.getParameter("no"));
+			int no = Integer.parseInt(request.getParameter("no")); //밑은 String에 담으니까 형변환 불필요함
 			String id = request.getParameter("id");
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
