@@ -23,8 +23,8 @@ public class GuestbookController extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("addList".equals(action)) {
-			System.out.println("guest > addList");
-			
+			System.out.println("action > addList");
+
 			GuestbookDao guestbookDao = new GuestbookDao();
 			List<GuestbookVo> guestbookList = guestbookDao.getList();
 
@@ -32,10 +32,9 @@ public class GuestbookController extends HttpServlet {
 
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/addList.jsp");
 
-			
 		} else if ("add".equals(action)) {
-			System.out.println("guest > add");
-			
+			System.out.println("action > add");
+
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String content = request.getParameter("content");
@@ -46,23 +45,19 @@ public class GuestbookController extends HttpServlet {
 			guestbookDao.guestbookInsert(guestbookVo);
 
 			WebUtil.redirect(request, response, "/mysite/guest?action=addList");
-		
-			
+
 		} else if ("deleteForm".equals(action)) {
-			System.out.println("guest > deletForm");
-			
+			System.out.println("action > deletForm");
+
 			WebUtil.forward(request, response, "/WEB-INF/views/guestbook/deleteForm.jsp");
-		
-		
+
 		} else if ("delete".equals(action)) {
-			System.out.println("guest > delete");
-		
+			System.out.println("action > delete");
+
 			int no = Integer.parseInt(request.getParameter("no"));
 			String password = request.getParameter("password");
-			
-			new GuestbookDao().guestbookDelete(no, password);
 
-			WebUtil.redirect(request, response, "/mysite/guest?action=addList");	
+			new GuestbookDao().guestbookDelete(no, password);
 
 		} else {
 			System.out.println("파라미터 없음");

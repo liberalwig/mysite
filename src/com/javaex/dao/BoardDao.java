@@ -1,6 +1,3 @@
-//@@@@@@@@@@@@@@@@@글을 읽는 건 autbboard아니어도 가능
-
-
 package com.javaex.dao;
 
 import java.sql.Connection;
@@ -49,8 +46,7 @@ public class BoardDao {
 		}
 	}
 
-	// authboard로 인증된 사람들이 게시글을 써서 저장 메소드: 로그인 과정 불필요
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@형태만@@@@@@@@@@@@@@@@@@@
+	// 게시판 리스트 보기
 	public int insert(BoardVo boardVo) {
 		int count = 0;
 		getConnection();
@@ -86,7 +82,7 @@ public class BoardDao {
 		return count;
 	}
 
-	//  게시글 조회를 위한 회원여부 확인(+비회원도 열람가능)
+	//  게시판 등록폼
 		public BoardVo getboard(String id, String password) {
 			BoardVo boardVo = null;
 			getConnection();
@@ -128,12 +124,7 @@ public class BoardDao {
 			return boardVo;
 		}
 	
-	
-	
-	
-	
-	
-	// no유지한 로그인 상태로 게시글 수정@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 게시판 게시글내용 읽기
 	public BoardVo getboardVo(int no) {
 		BoardVo boardVo = null;
 		getConnection();
@@ -179,7 +170,7 @@ public class BoardDao {
 		return boardVo;
 	}
 
-	// no유지한채로 로그인 상태에서 수정한 게시글을 db에 반영업데이트
+	// 게시판 게시글 수정폼
 	public void Update(boardVo boardVo) {
 		int count = 0;
 		getConnection();

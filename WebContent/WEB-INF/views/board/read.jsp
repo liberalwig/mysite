@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    
+    <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -68,35 +72,60 @@
 				<!-- //content-head -->
 	
 				<div id="board">
-					<div id="writeForm">
+					<div id="read">
 						<form action="#" method="get">
+							<!-- 작성자 -->
+							<div class="form-group">
+								<span class="form-text">작성자</span>
+								<span class="form-value">정우성</span>
+							</div>
+							
+							<!-- 조회수 -->
+							<div class="form-group">
+								<span class="form-text">조회수</span>
+								<span class="form-value">123</span>
+							</div>
+							
+							<!-- 작성일 -->
+							<div class="form-group">
+								<span class="form-text">작성일</span>
+								<span class="form-value">2020-03-02</span>
+							</div>
+							
 							<!-- 제목 -->
 							<div class="form-group">
-								<label class="form-text" for="txt-title">제목</label>
-								<input type="text" id="txt-title" name="" value="" placeholder="제목을 입력해 주세요">
+								<span class="form-text">제 목</span>
+								<span class="form-value">여기에는 글제목이 출력됩니다.</span>
 							</div>
 						
 							<!-- 내용 -->
-							<div class="form-group">
-								<textarea id="txt-content"></textarea>
+							<div id="txt-content">
+								<span class="form-value" >
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+									여기에는 본문내용이 출력됩니다.<br>
+								</span>
 							</div>
 							
-							<a id="btn_cancel" href="">취소</a>
-							<button id="btn_add" type="submit" >등록</button>
+							<a id="btn_modify" href="">수정</a>
+							<a id="btn_modify" href="">목록</a>
 							
 						</form>
 						<!-- //form -->
 					</div>
-					<!-- //writeForm -->
+					<!-- //read -->
 				</div>
 				<!-- //board -->
 			</div>
 			<!-- //content  -->
 
-
 		</div>
 		<!-- //container  -->
-
 
 		<div id="footer">
 			Copyright ⓒ 2020 황일영. All right reserved
@@ -108,3 +137,4 @@
 </body>
 
 </html>
+    

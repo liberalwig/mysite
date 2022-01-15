@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    
+    <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -68,7 +72,7 @@
 				<!-- //content-head -->
 	
 				<div id="board">
-					<div id="read">
+					<div id="modifyForm">
 						<form action="#" method="get">
 							<!-- 작성자 -->
 							<div class="form-group">
@@ -90,31 +94,31 @@
 							
 							<!-- 제목 -->
 							<div class="form-group">
-								<span class="form-text">제 목</span>
-								<span class="form-value">여기에는 글제목이 출력됩니다.</span>
+								<label class="form-text" for="txt-title">제목</label>
+								<input type="text" id="txt-title" name="" value="여기에는 글제목이 출력됩니다.">
 							</div>
 						
+							
+						
 							<!-- 내용 -->
-							<div id="txt-content">
-								<span class="form-value" >
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-									여기에는 본문내용이 출력됩니다.<br>
-								</span>
+							<div class="form-group">
+								<textarea id="txt-content">여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.
+	여기에는 본문내용이 출력됩니다.</textarea>
 							</div>
 							
-							<a id="btn_modify" href="">수정</a>
-							<a id="btn_modify" href="">목록</a>
+							<a id="btn_cancel" href="">취소</a>
+							<button id="btn_modify" type="submit" >수정</button>
 							
 						</form>
 						<!-- //form -->
 					</div>
-					<!-- //read -->
+					<!-- //modifyForm -->
 				</div>
 				<!-- //board -->
 			</div>
@@ -122,6 +126,7 @@
 
 		</div>
 		<!-- //container  -->
+
 
 		<div id="footer">
 			Copyright ⓒ 2020 황일영. All right reserved

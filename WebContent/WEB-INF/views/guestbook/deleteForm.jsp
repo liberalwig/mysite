@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.javaex.vo.UserVo"%>
-<%
-UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오브젝트이므로 혹시 몰라서 형변환해준다
-%>
+<%UserVo authUser = (UserVo)session.getAttribute("authUser");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -48,7 +46,7 @@ UserVo authUser = (UserVo) session.getAttribute("authUser"); //모든 애의 오
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="" method="">
+					<form action="/mysite/guest" method="get">
 						<table id="guestDelete">
 							<colgroup>
 								<col style="width: 10%;">
