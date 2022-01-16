@@ -13,8 +13,7 @@ import com.javaex.util.WebUtil;
 @WebServlet("/board")
 public class BoardController extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("board");
 		request.setCharacterEncoding("UTF-8");
@@ -24,8 +23,8 @@ public class BoardController extends HttpServlet {
 		if ("list".equals(action)) {
 			System.out.println("/board > list");
 
-			// 리다이렉트
-			WebUtil.redirect(request, response, "/mysite/board?action=list");
+			// 포워드
+			WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 		}
 
 		// 게시판 글쓰기폼
@@ -36,20 +35,44 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
 		}
 
-		// 게시판 글 읽기
+		// 게시판 글쓰기
+		else if ("write".equals(action)) {
+			System.out.println("/board > write");
+
+			// 리다이렉: 쓰고 난 뒤에는 게시판읽기리스트로 가야 하니까
+			WebUtil.redirect(request, response, "/mysite/board?action=list");
+		}
+
+		// 게시판 글 들어가서 읽기 폼
 		else if ("read".equals(action)) {
 			System.out.println("/board > read");
 
-			// 리다이렉트
-			WebUtil.redirect(request, response, "/mysite/board?action=read");
+			// 포워드
+			WebUtil.forward(request, response, "/WEB-INF/views/board/read.jsp");
 		}
 
-		// 게시판 겟글 수정폼
+		// 게시판 게시글 삭제
+		else if ("modifyForm".equals(action)) {
+			System.out.println("/board > modify");
+
+			// 리다이렉
+			WebUtil.redirect(request, response, "/mysite/board?action=list");
+		}
+
+		// 게시판 게시글 수정폼
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modify");
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
+		}
+
+		// 게시판 게시글 수정
+		else if ("modifyForm".equals(action)) {
+			System.out.println("/board > modify");
+
+			// 리다이렉
+			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
 		// 이외 오류
@@ -59,8 +82,7 @@ public class BoardController extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 
