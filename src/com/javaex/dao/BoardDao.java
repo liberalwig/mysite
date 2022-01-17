@@ -5,15 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.javaex.vo.BoardVo;
 
 public class BoardDao {
+
 	// 필드
-	// 0. import java.sql.*;
-	private Connection conn = null;
-	private PreparedStatement pstmt = null;
-	private ResultSet rs = null;
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
 
 	private String driver = "oracle.jdbc.driver.OracleDriver";
 	private String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -24,17 +26,22 @@ public class BoardDao {
 	private void getConnection() {
 		try {
 			Class.forName(driver);
+
 			conn = DriverManager.getConnection(url, id, pw);
+			System.out.println("접속성공(Board)");
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("error: 드라이버 로딩실패 - " + e);
+			System.out.println("error: 드라이버 로딩 실패 - " + e);
 		} catch (SQLException e) {
-			System.out.println("error: " + e);
+			System.out.println("error:" + e);
 		}
 	}
 
-	private void close() {
+	public void close() {
 		try {
+			if (rs != null) {
+				rs.close();
+			}
 			if (pstmt != null) {
 				pstmt.close();
 			}
@@ -42,205 +49,215 @@ public class BoardDao {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			System.out.println("error." + e);
+			System.out.println("error:" + e);
 		}
 	}
 
-	// 게시판 리스트 보기
-	public int insert(BoardVo boardVo) {
-		int count = 0;
-		getConnection();
-
-		try {
-			// 3. SQL문 준비 / 바인딩 / 실행
-			// 문자열
-			String query = "";
-			query += " insert into board ";
-			query += " values(seq_board_no.nextval, ?, ?, ?, ?, sysdate, ? ) ";
-
-			// 문자열을=>쿼리문으로
-			pstmt = conn.prepareStatement(query);
-
-			// 바인딩
-			pstmt.setInt(1, boardVo.getNo());
-			pstmt.setString(2, boardVo.getTitle());
-			pstmt.setString(3, boardVo.getContent());
-			pstmt.setInt(4, boardVo.getHit());
-			pstmt.setInt(6, boardVo.getUserno());
-
-			// 실행
-			count = pstmt.executeUpdate();
-
-			// 4. 결과처리
-			System.out.println(count + "건이 실행되었습니다");
-
-		} catch (SQLException e) {
-			System.out.println("error: " + e);
-		}
-
-		close();
-		return count;
-	}
-
-	//  게시판 등록폼
-		public BoardVo getboard(String id, String password) {
-			BoardVo boardVo = null;
-			getConnection();
-
-			try {
-				// 3. SQL문 준비 / 바인딩 / 실행
-				// 문자열@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-				String query = "";
-				query += " select id, ";
-				query += " from boards ";
-				query += " where user_no =? " ;
-				System.out.println(query);
-
-				// 문자열을=>쿼리문으로
-				pstmt = conn.prepareStatement(query);
-
-				// 바인딩
-				pstmt.setString(1, id);
-				pstmt.setString(2, password);
-
-				// 실행
-				rs = pstmt.executeQuery(); // 회원가입은 count = pstmt.executeUpdate(); 였다. 로그인/수정은 db필요하므로 쿼리문 필수.
-
-				// 4. 결과처리
-				while (rs.next()) {
-					int no = rs.getInt("no");// 회원고유번호(PK격) 쿼리문입력해서 저 아이디,패스워드인 사람의 넘버와 이름을 셀렉하고 그중 넘버를 Int에 담아줘
-					String name = rs.getString("name");
-
-					boardVo = new BoardVo(); // 좌항에 자료형 왜 안 써?
-					boardVo.setNo(no);
-				
-				}
-
-			} catch (SQLException e) {
-				System.out.println("error: " + e);
-			}
-
-			close();
-			return boardVo;
-		}
 	
-		// 게시판 게시글내용 읽기
-	public BoardVo getboardVo(int no) {
-		BoardVo boardVo = null;
+	// 게시글리스트 폼	
+	public List<BoardVo> getList() {
+		List<BoardVo> boardList = new ArrayList<BoardVo>();
+
 		getConnection();
-
 		try {
-			// 3. SQL문 준비 / 바인딩 / 실행
-			// 문자열
+			// SQL문 준비
 			String query = "";
-			query += " select , ";
-			query += " from boards ";
-			query += " where no = ? ";
-			query += " and user_no = ? "
+			query += " select   name, ";
+			query += "          no, ";
+			query += "          title, ";
+			query += "          content, ";
+			query += "          hit, ";
+			query += "          to_char('YY-MM-DD HH:MI') regdate, ";
+			query += "          userNo";
+			query += " from     board bo, users us ";
+			query += " where    bo.userNo = us.no ";
+			query += " order by bo.no desc ";
 
-			System.out.println(query);
-
-			// 문자열을=>쿼리문으로
+			// 쿼리문 작성
 			pstmt = conn.prepareStatement(query);
-
-			// 바인딩
-			pstmt.setInt(1, no);
 
 			// 실행
 			rs = pstmt.executeQuery();
 
-			// 4. 결과처리
+			// 결과처리
 			while (rs.next()) {
-				int number = rs.getInt("no");
-				String id = rs.getString("id");
-				String password = rs.getString("password");
-				String name = rs.getString("name"); // '정우성 님 환영합니다'를 안 보여주려면 이 행 안 쓰면 돼
-				String gender = rs.getString("gender");
-				// String id = rs.getString("id"); //회원정보 수정하고도 세션에 유지될 정보가 이름이 아니라 id이기 위해 위
-				// 가리고 이 행 생성
-
-				boardVo = new boardVo(no, id, password, name, gender);
+				int no = rs.getInt("no");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				int hit = rs.getInt("hit");
+				String regDate = rs.getString("regDate");
+				int userNo = rs.getInt("userNo");
+				
+				BoardVo boardVo = new BoardVo(no, title, content, hit, regDate, userNo);
+				boardList.add(boardVo);
 			}
 
 		} catch (SQLException e) {
-			System.out.println("error: " + e);
+			System.out.println("error:" + e);
+		}
+
+		close();
+		return boardList;
+	}
+	// 게시글 1개 읽기: 로그인, 비로그인 모두 + hit조회수 증가
+	public BoardVo getBoard(int num) {
+		BoardVo boardVo = null;
+		String query = null;
+		int userNo = 0;
+		getConnection();
+		try {
+			// SQL문 준비
+			query = "";
+			query += " select   user.name name, ";
+			query += "          board no, ";
+			query += "          board.title title, ";
+			query += "          board.content content, ";
+			query += "          board.hit hit, ";
+			query += "          to_char('YY-MM-DD HH:MI') regDate, ";
+			query += "          board.userNo userNo";
+			query += " from     board bo, users us ";
+			query += " where    userNo = no ";
+			query += " and		board.no = ? ";
+
+			// 쿼리문 작성
+			pstmt = conn.prepareStatement(query);
+
+			// 바인딩
+			pstmt.setInt(1, num);
+			
+			// 실행
+			rs = pstmt.executeQuery();
+			
+			// 결과처리
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String title = rs.getString("title");
+				String content = rs.getString("content");
+				int hit = rs.getInt("hit");
+				String regDate = rs.getString("regDate");
+				userNo = rs.getInt("userNo");
+				
+				boardVo = new BoardVo(no, title, content, hit, regDate, userNo);
+			}
+			
+			// SQL문 준비
+			query = "";
+			query += " update  board ";
+			query += " set     hit = hit+1 ";
+			query += " where   no = ? ";
+
+			// 쿼리문 작성
+			pstmt = conn.prepareStatement(query);
+			
+			// 바인딩
+			pstmt.setInt(1, userNo);
+			
+			// 실행
+			int count = pstmt.executeUpdate();
+
+			// 결과
+			System.out.println("["+count+"건 실행되었습니다.(Board)]");
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
 		}
 
 		close();
 		return boardVo;
 	}
+	
+	// 게시글 등록
+	public void boardInsert(BoardVo boardVo) {
 
-	// 게시판 게시글 수정폼
-	public void Update(boardVo boardVo) {
-		int count = 0;
 		getConnection();
 
 		try {
-			// 3. SQL문 준비 / 바인딩 / 실행
-			// 문자열
-			String query = "";
-			query += "update boards";
-			query += " set id = ?, ";
-			query += "     password = ?, ";
-			query += "     name = ?,";
-			query += "     gender = ? ";
-			query += "where no = ?; ";
 
-			// 쿼리문을=>문자열로
+			// SQL문 준비
+			String query = "";
+			query += " insert into board ";
+			query += " values (seq_board_no.nextval, ?, ?, 0, sysdate, ?) ";
+
+			// 쿼리문 작성
 			pstmt = conn.prepareStatement(query);
 
 			// 바인딩
-			pstmt.setString(1, boardVo.getId());
-			pstmt.setString(2, boardVo.getPassword());
-			pstmt.setString(3, boardVo.getName());
-			pstmt.setString(4, boardVo.getGender());
-			pstmt.setInt(5, boardVo.getNo());
+			pstmt.setString(1, boardVo.getTitle());
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setInt(3, boardVo.getuserNo());
 
 			// 실행
-			count = pstmt.executeUpdate();
+			int count = pstmt.executeUpdate();
 
-			// 4. 결과처리
-			System.out.println("[" + count + " 건이 업데이트 되었습니다. ]");
+			// 결과처리
+			System.out.println("[" + count + "건 추가되었습니다.(BoardDao)]");
 
 		} catch (SQLException e) {
-			System.out.println("error: " + e);
+			System.out.println("error:" + e);
 		}
-
 		close();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// 게시글 삭제
+	public void boardDelete(int num) {
+		getConnection();
+
+		try {
+
+			// SQL문 준비
+			String query = "";
+			query += " delete board ";
+			query += " where no = ? ";
+
+			// 쿼리문 작성
+			pstmt = conn.prepareStatement(query);
+
+			// 바인딩
+			pstmt.setInt(1, num);
+
+			// 실행
+			int count = pstmt.executeUpdate();
+
+			// 결과처리
+			System.out.println("[" + count + "건 삭제되었습니다.(BoardDao)]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+	}
+
+	// 게시글 수정 반영
+	public void boardUpdate(BoardVo boardVo) {
+		getConnection();
+
+		try {
+
+			// SQL문 준비
+			String query = "";
+			query += " update board ";
+			query += " set    title = ?, ";
+			query += " 		  content = ? ";
+			query += " where  no = ? ";
+
+			// 쿼리문 작성
+			pstmt = conn.prepareStatement(query);
+
+			// 바인딩
+			pstmt.setString(1, boardVo.getTitle());
+			pstmt.setString(2, boardVo.getContent());
+			pstmt.setInt(3, boardVo.getNo());
+
+			// 실행
+			int count = pstmt.executeUpdate();
+
+			// 결과처리
+			System.out.println("[" + count + "건 수정되었습니다.(BoardDao)]");
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		}
+		close();
+	}
 	
 }

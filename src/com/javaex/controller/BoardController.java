@@ -19,7 +19,7 @@ public class BoardController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
-		// 게시판 리스트
+		// 게시판 리스트@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		if ("list".equals(action)) {
 			System.out.println("/board > list");
 
@@ -35,7 +35,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
 		}
 
-		// 게시판 글쓰기
+		// 게시판 글쓰기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		else if ("write".equals(action)) {
 			System.out.println("/board > write");
 
@@ -43,7 +43,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
-		// 게시판 글 들어가서 읽기 폼
+		// 게시판 글 들어가서 읽기 폼@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		else if ("read".equals(action)) {
 			System.out.println("/board > read");
 
@@ -51,7 +51,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/read.jsp");
 		}
 
-		// 게시판 게시글 삭제
+		// 게시판 게시글 삭제@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modify");
 
@@ -59,7 +59,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
-		// 게시판 게시글 수정폼
+		// 게시판 게시글 수정폼@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modify");
 
@@ -67,7 +67,7 @@ public class BoardController extends HttpServlet {
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
 		}
 
-		// 게시판 게시글 수정
+		// 게시판 게시글 수정@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modify");
 

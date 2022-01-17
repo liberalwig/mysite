@@ -7,8 +7,8 @@ public class BoardVo {
 	private String title;
 	private String content;
 	private int hit;
-	private String regdate;
-	private int userno;
+	private String regDate;
+	private int userNo;
 	
 	
 	// 생성자
@@ -16,14 +16,14 @@ public class BoardVo {
 		
 	}
 	
-	public BoardVo(int no, String title, String content, int hit, String regdate, int userno) {
+	public BoardVo(int no, String title, String content, int hit, String regDate, int userNo) {
 		super();
 		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.hit = hit;
-		this.regdate = regdate;
-		this.userno = userno;
+		this.regDate = regDate;
+		this.userNo = userNo;
 	}
 
 	
@@ -60,28 +60,28 @@ public class BoardVo {
 		this.hit = hit;
 	}
 
-	public String getRegdate() {
-		return regdate;
+	public String getregDate() {
+		return regDate;
 	}
 
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
+	public void setregDate(String regDate) {
+		this.regDate = regDate;
 	}
 
-	public int getUserno() {
-		return userno;
+	public int getuserNo() {
+		return userNo;
 	}
 
-	public void setUserno(int userno) {
-		this.userno = userno;
+	public void setuserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	
 	// 메소드 일반
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", regdate="
-				+ regdate + ", userno=" + userno + "]";
+		return "BoardVo [no=" + no + ", title=" + title + ", content=" + content + ", hit=" + hit + ", regDate="
+				+ regDate + ", userNo=" + userNo + "]";
 	}
 	
 	
