@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -27,15 +26,15 @@
 				<li><a href="" class="btn_s">로그아웃</a></li>
 				<li><a href="" class="btn_s">회원정보수정</a></li>
 			</ul>
-			-->	
+			-->
 			<ul>
 				<li><a href="" class="btn_s">로그인</a></li>
 				<li><a href="" class="btn_s">회원가입</a></li>
 			</ul>
-			
+
 		</div>
 		<!-- //header -->
-		
+
 		<div id="nav">
 			<ul class="clearfix">
 				<li><a href="">입사지원서</a></li>
@@ -70,7 +69,7 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-	
+
 				<div id="board">
 					<div id="list">
 						<form action="" method="">
@@ -79,7 +78,7 @@
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
-						<table >
+						<table>
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -133,7 +132,7 @@
 								</tr>
 							</tbody>
 						</table>
-			
+
 						<div id="paging">
 							<ul>
 								<li><a href="">◀</a></li>
@@ -149,12 +148,12 @@
 								<li><a href="">10</a></li>
 								<li><a href="">▶</a></li>
 							</ul>
-							
-							
+
+
 							<div class="clear"></div>
 						</div>
 						<a id="btn_write" href="">글쓰기</a>
-					
+
 					</div>
 					<!-- //list -->
 				</div>
@@ -164,11 +163,9 @@
 
 		</div>
 		<!-- //container  -->
-		
 
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
-		</div>
+
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
 	</div>
 	<!-- //wrap -->

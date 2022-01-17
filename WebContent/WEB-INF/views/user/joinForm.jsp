@@ -17,7 +17,8 @@
 
 		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-		</div> <!-- //header+ //nav -->
+		</div>
+		<!-- //header+ //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -92,11 +93,6 @@
 							</div>
 
 							<input type="text" name="action" value="join">
-
-
-
-
-
 
 						</form>
 					</div>
