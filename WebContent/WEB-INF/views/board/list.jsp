@@ -7,9 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../../assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/board.css" rel="stylesheet" type="text/css">
-
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -30,7 +29,6 @@
 			<!-- //aside -->
 
 			<div id="content">
-
 				<div id="content-head">
 					<h3>게시판</h3>
 					<div id="location">
@@ -96,8 +94,11 @@
 							</ul>
 							<div class="clear"></div>
 						</div>
+						
+						<c:if test="${!(empty sessionScope.authUser)}">
 						<a id="btn_write" href="/mysite/board?action=writeForm">글쓰기</a>
-
+						</c:if>
+				
 					</div>
 					<!-- //list -->
 

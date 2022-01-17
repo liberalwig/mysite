@@ -7,9 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../../assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="../../assets/css/board.css" rel="stylesheet" type="text/css">
-
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -30,7 +29,6 @@
 			<!-- //aside -->
 
 			<div id="content">
-
 				<div id="content-head">
 					<h3>게시판</h3>
 					<div id="location">
@@ -64,18 +62,17 @@
 
 							<!-- 제목 -->
 							<div class="form-group">
-								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name=""
-									value="${requestScope.boardVo.title}">
+								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name="boardtitle" value="${requestScope.boardVo.title}">
 							</div>
 
 							<!-- 내용 -->
 							<div class="form-group">
-								<textarea id="txt-content">${requestScope.boardVo.content}			
-							</textarea>
+								<textarea id="txt-content">${requestScope.boardVo.content}</textarea>
 							</div>
 
 							<a id="btn_cancel" href="/mysite/board?action=read&no=${requestScope.boardVo.no}">취소</a>
-							<button id="btn_modify" type="submit">수정</button><input type="text" name="action" value="modify"> <input type="text" name="no" value="${requestScope.boardVo.no}">
+							<button id="btn_modify" type="submit">수정</button>
+							<input type="text" name="action" value="modify"> <input type="text" name="no" value="${requestScope.boardVo.no}">
 						</form>
 						<!-- //form -->
 
@@ -93,6 +90,7 @@
 
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
+	
 	</div>
 	<!-- //wrap -->
 

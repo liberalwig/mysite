@@ -20,13 +20,13 @@ public class BoardController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		System.out.println("board");
+		System.out.println("/board");
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
 		// 게시판 리스트 읽기
 		if ("list".equals(action)) {
-			System.out.println("/board > list");
+			System.out.println("/action > list");
 
 			List<BoardVo> boardList = new BoardDao().getList();
 			request.setAttribute("boardList", boardList);
@@ -37,7 +37,7 @@ public class BoardController extends HttpServlet {
 
 		// 게시판 글쓰기폼
 		else if ("writeForm".equals(action)) {
-			System.out.println("/board > writeForm");
+			System.out.println("/action > writeForm");
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/board/writeForm.jsp");
@@ -45,7 +45,7 @@ public class BoardController extends HttpServlet {
 
 		// 게시판 글쓰기
 		else if ("write".equals(action)) {
-			System.out.println("/board > write");
+			System.out.println("/action > write");
 
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo) session.getAttribute("authUser");
@@ -63,9 +63,11 @@ public class BoardController extends HttpServlet {
 
 		// 게시판 글 들어가서 읽기 폼
 		else if ("read".equals(action)) {
-			System.out.println("/board > read");
+			System.out.println("/action > read");
 
 			int no = Integer.parseInt(request.getParameter("no"));
+
+			new BoardDao().hitAdd(no);
 			BoardVo boardVo = new BoardDao().getBoard(no);
 			request.setAttribute("boardVo", boardVo);
 
@@ -74,17 +76,16 @@ public class BoardController extends HttpServlet {
 		}
 
 		// 게시판 게시글 삭제
-		else if ("modifyForm".equals(action)) {
-			System.out.println("/board > modify");
+		else if ("delete".equals(action)) {// 게시글 삭제
+			System.out.println("action > delete");
 
 			int num = Integer.parseInt(request.getParameter("no"));
 			new BoardDao().boardDelete(num);
 
-			// 리다이렉
 			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
-		// 게시판 게시글 수정폼
+		// 게시판 수정폼
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modifyForm");
 
@@ -92,13 +93,13 @@ public class BoardController extends HttpServlet {
 			BoardVo boardVo = new BoardDao().getBoard(no);
 			request.setAttribute("boardVo", boardVo);
 
-			// 포워드
-			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
+			// 리다이렉
+			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
 		// 게시판 게시글 수정
-		else if ("modifyForm".equals(action)) {
-			System.out.println("/board > modify");
+		else if ("modify".equals(action)) {
+			System.out.println("/action > modify");
 
 			int no = Integer.parseInt(request.getParameter("no"));
 			String title = request.getParameter("title");
@@ -107,8 +108,8 @@ public class BoardController extends HttpServlet {
 			BoardVo boardVo = new BoardVo(no, title, content);
 			new BoardDao().boardUpdate(boardVo);
 
-			// 리다이렉
-			WebUtil.redirect(request, response, "/mysite/board?action=list");
+			// 포워드
+			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
 		}
 
 		// 이외 오류
