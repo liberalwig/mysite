@@ -12,7 +12,6 @@
 
 </head>
 
-
 <body>
 	<div id="wrap">
 		<div id="header" class="clearfix">
@@ -47,7 +46,7 @@
 
 				<div id="board">
 					<div id="list">
-						<form action="" method="">
+						<form action="" method="get">
 							<div class="form-group text-right">
 								<input type="text">
 								<button type="submit" id=btn_search>검색</button>
@@ -64,20 +63,20 @@
 									<th>관리</th>
 								</tr>
 							</thead>
-						<tbody>
-							<c:forEach items="${requestScope.boardList}" var="vo">
-								<tr>
-									<td>${vo.no}</td>
-									<td class="text-left"><a href="/mysite/board?action=read&no=${vo.no}">${vo.title}</a></td>
-									<td>${vo.name}</td>
-									<td>${vo.hit}</td>
-									<td>${vo.regDate}</td>
-									<td><c:if test="${(sessionScope.authUser.no) == (vo.userNo)}">
-											<a href="/mysite/board?action=delete&no=${vo.no}">[삭제]</a>
-										</c:if></td>
-								</tr>
-							</c:forEach>
-						</tbody>
+							<tbody>
+								<c:forEach items="${requestScope.boardList}" var="vo">
+									<tr>
+										<td>${vo.no}</td>
+										<td class="text-left"><a href="/mysite/board?action=read&no=${vo.no}">${vo.title}</a></td>
+										<td>${vo.name}</td>
+										<td>${vo.hit}</td>
+										<td>${vo.regDate}</td>
+										<td><c:if test="${(sessionScope.authUser.no) == (vo.userNo)}">
+												<a href="/mysite/board?action=delete&no=${vo.no}">[삭제]</a>
+											</c:if></td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 
 						<div id="paging">
@@ -95,10 +94,9 @@
 								<li><a href="">10</a></li>
 								<li><a href="">▶</a></li>
 							</ul>
-
 							<div class="clear"></div>
 						</div>
-						<a id="btn_write" href="">글쓰기</a>
+						<a id="btn_write" href="/mysite/board?action=writeForm">글쓰기</a>
 
 					</div>
 					<!-- //list -->

@@ -14,7 +14,6 @@
 
 <body>
 	<div id="wrap">
-
 		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		</div>
@@ -66,11 +65,8 @@
 							<!-- 제목 -->
 							<div class="form-group">
 								<label class="form-text" for="txt-title">제목</label> <input type="text" id="txt-title" name=""
-									value="${requestScope.boardVo.title}"
-								>
+									value="${requestScope.boardVo.title}">
 							</div>
-
-
 
 							<!-- 내용 -->
 							<div class="form-group">
@@ -78,21 +74,22 @@
 							</textarea>
 							</div>
 
-							<a id="btn_cancel" href="">취소</a>
-							<button id="btn_modify" type="submit">수정</button>
-
+							<a id="btn_cancel" href="/mysite/board?action=read&no=${requestScope.boardVo.no}">취소</a>
+							<button id="btn_modify" type="submit">수정</button><input type="text" name="action" value="modify"> <input type="text" name="no" value="${requestScope.boardVo.no}">
 						</form>
 						<!-- //form -->
+
 					</div>
 					<!-- //modifyForm -->
+
 				</div>
 				<!-- //board -->
+
 			</div>
 			<!-- //content  -->
 
 		</div>
 		<!-- //container  -->
-
 
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->

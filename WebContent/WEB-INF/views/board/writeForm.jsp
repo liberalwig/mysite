@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,8 @@
 <link href="../../assets/css/board.css" rel="stylesheet" type="text/css">
 
 </head>
-
-
 <body>
 	<div id="wrap">
-
 		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		</div> <!-- //header+ //nav -->
@@ -30,7 +28,6 @@
 			<!-- //aside -->
 
 			<div id="content">
-
 				<div id="content-head">
 					<h3>게시판</h3>
 					<div id="location">
@@ -61,22 +58,25 @@
 
 							<a id="btn_cancel" href="">취소</a>
 							<button id="btn_add" type="submit">등록</button>
-
+							<input type="text" name="action" value="write"> <input type="text" name="no" value="${sessionScope.authUser.no}"> <input type="text" name="name" value="${sessionScope.authUser.name}">
 						</form>
 						<!-- //form -->
+				
 					</div>
 					<!-- //writeForm -->
+				
 				</div>
 				<!-- //board -->
+		
 			</div>
 			<!-- //content  -->
-
 
 		</div>
 		<!-- //container  -->
 
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
+	
 	</div>
 	<!-- //wrap -->
 
