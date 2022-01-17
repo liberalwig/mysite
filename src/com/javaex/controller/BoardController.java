@@ -18,8 +18,7 @@ import com.javaex.vo.UserVo;
 @WebServlet("/board")
 public class BoardController extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		System.out.println("board");
 		request.setCharacterEncoding("UTF-8");
@@ -62,33 +61,51 @@ public class BoardController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
-		// 게시판 글 들어가서 읽기 폼@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 게시판 글 들어가서 읽기 폼
 		else if ("read".equals(action)) {
 			System.out.println("/board > read");
+
+			int no = Integer.parseInt(request.getParameter("no"));
+			BoardVo boardVo = new BoardDao().getBoard(no);
+			request.setAttribute("boardVo", boardVo);
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/board/read.jsp");
 		}
 
-		// 게시판 게시글 삭제@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 게시판 게시글 삭제
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modify");
+
+			int num = Integer.parseInt(request.getParameter("no"));
+			new BoardDao().boardDelete(num);
 
 			// 리다이렉
 			WebUtil.redirect(request, response, "/mysite/board?action=list");
 		}
 
-		// 게시판 게시글 수정폼@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 게시판 게시글 수정폼
 		else if ("modifyForm".equals(action)) {
-			System.out.println("/board > modify");
+			System.out.println("/board > modifyForm");
+
+			int no = Integer.parseInt(request.getParameter("no"));
+			BoardVo boardVo = new BoardDao().getBoard(no);
+			request.setAttribute("boardVo", boardVo);
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/board/modifyForm.jsp");
 		}
 
-		// 게시판 게시글 수정@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 게시판 게시글 수정
 		else if ("modifyForm".equals(action)) {
 			System.out.println("/board > modify");
+
+			int no = Integer.parseInt(request.getParameter("no"));
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+
+			BoardVo boardVo = new BoardVo(no, title, content);
+			new BoardDao().boardUpdate(boardVo);
 
 			// 리다이렉
 			WebUtil.redirect(request, response, "/mysite/board?action=list");
@@ -101,8 +118,7 @@ public class BoardController extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 
