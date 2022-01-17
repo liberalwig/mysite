@@ -98,7 +98,7 @@ UserVo authUser = (UserVo) session.getAttribute("authUser");
 								<td>${vo.no}</td>
 								<td>${vo.name}</td>
 								<td>${vo.regDate}</td>
-								<td><a href="/mysite/guest?action=delteForm?no=${vo.no}">[삭제]</a></td>
+								<td><a href="/mysite/guest?action=deleteForm?no=${vo.no}">[삭제]</a></td>
 							</tr>
 							<tr>
 								<td colspan=4 class="text-left">${vo.content}</td>

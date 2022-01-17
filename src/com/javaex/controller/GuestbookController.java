@@ -56,8 +56,9 @@ public class GuestbookController extends HttpServlet {
 
 			int no = Integer.parseInt(request.getParameter("no"));
 			String password = request.getParameter("password");
-
 			new GuestbookDao().guestbookDelete(no, password);
+
+			WebUtil.redirect(request, response, "/mysite/guest?action=addList");
 
 		} else {
 			System.out.println("파라미터 없음");

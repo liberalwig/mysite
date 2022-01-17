@@ -16,7 +16,6 @@
 
 <body>
 	<div id="wrap">
-
 		<div id="header" class="clearfix">
 			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		</div>
@@ -61,7 +60,7 @@
 								<td><a href="/mysite/main">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="" value=""> <input type='hidden' name="" value="">
+						<input type='hidden' name="no" value="${param.no}"> <input type='hidden' name="action" value="delete">
 					</form>
 
 				</div>
