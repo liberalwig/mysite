@@ -70,8 +70,8 @@ public class BoardDao {
 			query += "          to_char('YY-MM-DD HH:MI') regdate, ";
 			query += "          userNo";
 			query += " from     board bo, users us ";
-			query += " where    bo.userNo = us.no ";
-			query += " order by bo.no desc ";
+			query += " where    board.userNo = users.no ";
+			query += " order by board.no desc ";
 
 			// 쿼리문 작성
 			pstmt = conn.prepareStatement(query);
