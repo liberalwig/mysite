@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,36 +15,10 @@
 
 <body>
 	<div id="wrap">
-
 		<div id="header" class="clearfix">
-			<h1>
-				<a href="">MySite</a>
-			</h1>
-
-			<!-- 
-			<ul>
-				<li>황일영 님 안녕하세요^^</li>
-				<li><a href="" class="btn_s">로그아웃</a></li>
-				<li><a href="" class="btn_s">회원정보수정</a></li>
-			</ul>
-			-->
-			<ul>
-				<li><a href="" class="btn_s">로그인</a></li>
-				<li><a href="" class="btn_s">회원가입</a></li>
-			</ul>
-
+			<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		</div>
-		<!-- //header -->
-
-		<div id="nav">
-			<ul class="clearfix">
-				<li><a href="">입사지원서</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">방명록</a></li>
-			</ul>
-		</div>
-		<!-- //nav -->
+		<!-- //header+ //nav -->
 
 		<div id="container" class="clearfix">
 			<div id="aside">
@@ -89,48 +64,20 @@
 									<th>관리</th>
 								</tr>
 							</thead>
-							<tbody>
+						<tbody>
+							<c:forEach items="${requestScope.boardList}" var="vo">
 								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
+									<td>${vo.no}</td>
+									<td class="text-left"><a href="/mysite/board?action=read&no=${vo.no}">${vo.title}</a></td>
+									<td>${vo.name}</td>
+									<td>${vo.hit}</td>
+									<td>${vo.regDate}</td>
+									<td><c:if test="${(sessionScope.authUser.no) == (vo.userNo)}">
+											<a href="/mysite/board?action=delete&no=${vo.no}">[삭제]</a>
+										</c:if></td>
 								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr>
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-								<tr class="last">
-									<td>123</td>
-									<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-									<td>정우성</td>
-									<td>1232</td>
-									<td>2020-12-23</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-							</tbody>
+							</c:forEach>
+						</tbody>
 						</table>
 
 						<div id="paging">
@@ -149,32 +96,28 @@
 								<li><a href="">▶</a></li>
 							</ul>
 
-
 							<div class="clear"></div>
 						</div>
 						<a id="btn_write" href="">글쓰기</a>
 
 					</div>
 					<!-- //list -->
+
 				</div>
 				<!-- //board -->
+
 			</div>
 			<!-- //content  -->
 
 		</div>
 		<!-- //container  -->
 
-
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 		<!-- //footer -->
+
 	</div>
 	<!-- //wrap -->
 
 </body>
 
-</html>
-
-
-
-</body>
 </html>

@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-
 <!-- header -->
 <div id="header" class="clearfix">
 	<h1>
