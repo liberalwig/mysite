@@ -99,7 +99,7 @@ public class BoardDao {
 		close();
 		return boardList;
 	}
-	// 게시글 1개 읽기: 로그인, 비로그인 모두 + hit조회수 증가
+	// 게시글 1개 읽기: 두 table join + 로그인, 비로그인 모두 열람 가능 + hit조회수 증가
 	public BoardVo getBoard(int num) {
 		BoardVo boardVo = null;
 		String query = null;
