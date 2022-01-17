@@ -99,15 +99,17 @@ public class BoardDao {
 		close();
 		return boardList;
 	}
-	// 게시글 1개 읽기: 두 table join + 로그인, 비로그인 모두 열람 가능 + hit조회수 증가
+	
+	// 게시글 1개 읽기: 두 table join + 로그인, 비로그인 모두 열람 가능
 	public BoardVo getBoard(int num) {
 		BoardVo boardVo = null;
-		String query = null;
+		
 		int userNo = 0;
 		getConnection();
+	
 		try {
 			// SQL문 준비
-			query = "";
+			String query = "";
 			query += " select   user.name name, ";
 			query += "          board no, ";
 			query += "          board.title title, ";
@@ -140,7 +142,7 @@ public class BoardDao {
 				boardVo = new BoardVo(no, title, content, hit, regDate, userNo);
 			}
 			
-			// SQL문 준비
+			// SQL문 준비: hit조회수 증가
 			query = "";
 			query += " update  board ";
 			query += " set     hit = hit+1 ";
