@@ -136,7 +136,7 @@ public class GuestbookDao {
 
 		try {// 3. 쿼리문 준비 / 바인딩 / 실행
 			String query = "";
-			query += " delete from guestbook ";
+			query += " delete guestbook ";
 			query += " where no = ? ";
 			query += " and password = ? ";
 

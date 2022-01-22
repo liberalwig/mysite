@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.javaex.vo.UserVo"%>
-<%UserVo authUser = (UserVo)session.getAttribute("authUser");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -9,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="/mysite/css/mysite.css" rel="stylesheet" type="text/css">
+<link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="/mysite/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 </head>

@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.javaex.vo.UserVo"%>
-<%@ page import="com.javaex.vo.GuestbookVo"%>
-<%@ page import="com.javaex.dao.GuestbookDao"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.util.List"%>
-<%
-UserVo authUser = (UserVo) session.getAttribute("authUser");
-%>
-
 
 <!DOCTYPE html>
 <html>
@@ -98,7 +90,7 @@ UserVo authUser = (UserVo) session.getAttribute("authUser");
 								<td>${vo.no}</td>
 								<td>${vo.name}</td>
 								<td>${vo.regDate}</td>
-								<td><a href="/mysite/guest?action=deleteForm?no=${vo.no}">[삭제]</a></td>
+								<td><a href="/mysite/guest?action=deleteForm&no=${vo.no}">[삭제]</a></td>
 							</tr>
 							<tr>
 								<td colspan=4 class="text-left">${vo.content}</td>
