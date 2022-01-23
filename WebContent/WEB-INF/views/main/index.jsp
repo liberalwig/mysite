@@ -21,8 +21,10 @@
 
 		<div id="container" class="clearfix">
 			<!-- aside 없음 -->
+			
 			<div id="full-content">
 				<!-- content-head 없음 -->
+				
 				<div id="index">
 					<img id="profile-img" src="/mysite/assets/images/profile.jpg">
 					<div id="greetings">
@@ -35,17 +37,21 @@
 						</p>
 					</div>
 					<!-- //greetings -->
+
 					<div class="clear"></div>
+
 				</div>
 				<!-- //index -->
+
 			</div>
 			<!-- //full-content -->
+
 		</div>
 		<!-- //container -->
 
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
 		<!-- //footer -->
+
 	</div>
 	<!-- //wrap -->
 </body>
