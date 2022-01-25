@@ -1,4 +1,3 @@
-//2022.01.11(화)13:52수업-17:47
 package com.javaex.controller;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import com.javaex.vo.UserVo;
 
 @WebServlet("/user")
 public class UserController extends HttpServlet {
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -25,15 +24,14 @@ public class UserController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String action = request.getParameter("action");
 
-		// 회원가입 폼
+		// 유저_1>회원가입폼
 		if ("joinForm".equals(action)) {
 			System.out.println("/user > joinForm");
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinForm.jsp");
 
-			// 회원가입 과정
-
+			// 유저_2>회원가입
 		} else if ("join".equals(action)) {
 			System.out.println("user > join");
 
@@ -54,18 +52,16 @@ public class UserController extends HttpServlet {
 
 			// 포워드
 			WebUtil.forward(request, response, "/WEB-INF/views/user/joinOk.jsp");
-
 		}
 
-		// 로그인 폼
+		// 유저_3>로그인폼
 		else if ("loginForm".equals(action)) {
 			System.out.println("user > loginForm");
 
 			WebUtil.forward(request, response, "/WEB-INF/views/user/loginForm.jsp");
-
 		}
 
-		// 로그인 과정
+		// 유저_4>로그인 후 성공시 메인으로
 		else if ("login".equals(action)) {
 			System.out.println("user > login");
 
@@ -102,7 +98,7 @@ public class UserController extends HttpServlet {
 			}
 		}
 
-		// 로그아웃
+		// 유저_5>로그아웃
 		else if ("logout".equals(action)) {
 			System.out.println("user > logout");
 
@@ -113,12 +109,12 @@ public class UserController extends HttpServlet {
 			WebUtil.redirect(request, response, "/mysite/main");
 		}
 
-		// 수정 폼
+		// 유저_6>수정폼
 		else if ("modifyForm".equals(action)) {
 			System.out.println("user > modifyForm");
 
 			HttpSession session = request.getSession();
-			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			UserVo authUser = (UserVo) session.getAttribute("authUser");
 
 			int no = authUser.getNo(); // 세션에 있는 authUser에 No저장해서 정수형 no에 담아
 
@@ -133,9 +129,9 @@ public class UserController extends HttpServlet {
 
 			WebUtil.forward(request, response, "WEB-INF/views/user/modifyForm.jsp"); // modifyForm화면을 띄워준다
 
-			// 수정 과정
+			// 유저_7>수정
 		} else if ("modify".equals(action)) {
-			int no = Integer.parseInt(request.getParameter("no")); //밑은 String에 담으니까 형변환 불필요함
+			int no = Integer.parseInt(request.getParameter("no")); // 밑은 String에 담으니까 형변환 불필요함
 			String id = request.getParameter("id");
 			String password = request.getParameter("password");
 			String name = request.getParameter("name");
