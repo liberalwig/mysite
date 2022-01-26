@@ -78,8 +78,7 @@
 
 
 					<c:forEach items="${requestScope.gList}" var="vo">
-						<!-- 얘때매 안 되는 중 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
-					<table class="guestRead">
+							<table class="guestRead">
 							<colgroup>
 								<col style="width: 10%;">
 								<col style="width: 40%;">

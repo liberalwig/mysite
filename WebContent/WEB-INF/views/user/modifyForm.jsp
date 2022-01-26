@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.javaex.vo.UserVo"%>
 
 
 <!DOCTYPE html>
@@ -8,10 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <link href="/mysite/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="/mysite/assets/css/user.css" rel="stylesheet" type="text/css">
-
 </head>
 
 <body>
@@ -79,7 +76,6 @@
 							<!-- //젠더 -->
 							<div class="form-group">
 								<span class="form-text">성별</span>
-
 								<c:choose>
 									<c:when test="${requestScope.userVo.gender == 'female'}">
 										<label for="rdo-male">남</label>
@@ -91,12 +87,10 @@
 									<c:otherwise>
 										<label for="rdo-male">남</label>
 										<input type="radio" id="rdo-male" name="gender" value="male" checked="checked">
-
 										<label for="rdo-female">여</label>
 										<input type="radio" id="rdo-female" name="gender" value="female">
 									</c:otherwise>
 								</c:choose>
-
 							</div>
 
 							<!-- 버튼영역 -->
@@ -104,7 +98,8 @@
 								<button type="submit" id="btn-submit">회원정보수정</button>
 							</div>
 
-							<input type="text" name="action" value="modify">  <input type="text" name="no" value="${requestScope.userVo.no}"> 
+							<input type="text" name="action" value="modify">  
+							<input type="text" name="no" value="${requestScope.userVo.no}"> 
 							<input type="text" name="id" value="${requestScopeScope.userVo.id}">
 
 						</form>
